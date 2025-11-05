@@ -2,24 +2,54 @@
 # dependencies = [
 #   "httpx",
 #   "python-dotenv",
+#   "python-ulid>=3.0.0",
+#   "typing-extensions",
+#   "colorlog",
 # ]
 # ///
 
 # NOTE: Please read ./README.md
 
+import json
+import typing
 import httpx
 import logging
+import colorlog
 from dotenv import dotenv_values
+from ulid import ULID
 
-logger = logging.getLogger(__name__)
 config = dotenv_values(".env")
+
+
+def logging_init():
+    handler = colorlog.StreamHandler()
+    handler.setFormatter(
+        colorlog.ColoredFormatter(
+            "%(log_color)s[%(levelname)s]%(reset)s %(message)s",
+            log_colors={
+                "DEBUG": "cyan",
+                "INFO": "green",
+                "WARNING": "yellow",
+                "ERROR": "red",
+                "CRITICAL": "bold_red",
+            },
+        )
+    )
+
+    logger = colorlog.getLogger()
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+    return logger
+
+
+logger = logging_init()
 
 
 # Define the GraphQL query
 class Query:
-
+    ME_OP_NAME = "Me"
     ME = """
-        query MyQuery {
+        query Me {
           me {
             id
             displayName
@@ -27,8 +57,9 @@ class Query:
         }
     """
 
+    PUBLIC_PROJECTS_OP_NAME = "PublicProjectsList"
     PUBLIC_PROJECTS = """
-        query MyQuery($filters: ProjectFilter = {}) {
+        query PublicProjectsList($filters: ProjectFilter = {}) {
           publicProjects(filters: $filters) {
             totalCount
             results {
@@ -102,8 +133,9 @@ class Query:
         }
         """
 
+    PROJECTS_OP_NAME = "ProjectsList"
     PROJECTS = """
-        query MyQuery {
+        query ProjectsList {
           projects {
             totalCount
             results {
@@ -177,13 +209,73 @@ class Query:
         }
         """
 
-class MapswipeApi:
+    ORGANIZATIONS_OP_NAME = "Organizations"
+    ORGANIZATIONS = """
+        query Organizations {
+          organizations {
+            totalCount
+            results {
+              id
+              name
+            }
+          }
+        }
+    """
+
+    CREATE_DRAFT_PROJECTS_OP_NAME = "NewDraftProject"
+    CREATE_DRAFT_PROJECTS = """
+        mutation NewDraftProject($data: ProjectCreateInput!) {
+            createProject(data: $data) {
+                ... on OperationInfo {
+                  __typename
+                  messages {
+                    code
+                    field
+                    kind
+                    message
+                  }
+                }
+                ... on ProjectTypeMutationResponseType {
+                  errors
+                  ok
+                  result {
+                    id
+                    firebaseId
+                  }
+                }
+            }
+        }
+    """
+
+    CREATE_PROJECT_ASSET_OP_NAME = "CreateProjectAsset"
+    CREATE_PROJECT_ASSET = """
+        mutation CreateProjectAsset($data: ProjectAssetCreateInput!) {
+          createProjectAsset(data: $data) {
+            ... on ProjectAssetTypeMutationResponseType {
+              errors
+              ok
+              result {
+                id
+                file {
+                  name
+                  url
+                }
+              }
+            }
+          }
+        }
+    """
+
+
+class MapSwipeApiClient:
     # Set the base URL
     BASE_URL = config["BACKEND_URL"]
     CSRFTOKEN_KEY = config["CSRFTOKEN_KEY"]
     MANAGER_URL = config["MANAGER_URL"]
 
-    ENABLE_AUTHENTICATION = config.get("ENABLE_AUTHENTICATION", "false").lower() == "true"
+    ENABLE_AUTHENTICATION = (
+        config.get("ENABLE_AUTHENTICATION", "false").lower() == "true"
+    )
     FB_AUTH_URL = config.get("FB_AUTH_URL")
 
     # Your web-app login credential
@@ -202,7 +294,6 @@ class MapswipeApi:
 
         csrf_token = self.client.cookies.get(self.CSRFTOKEN_KEY)
         self.headers = {
-            "content-type": "application/json",
             # Required for CSRF verification
             "x-csrftoken": csrf_token,
             "origin": self.MANAGER_URL,
@@ -239,26 +330,123 @@ class MapswipeApi:
         )
         resp.raise_for_status()
 
-    def graphql_request(self, query, variables = None):
+    def graphql_request_with_files(
+        self,
+        operation_name: str,
+        query: str,
+        *,
+        files: dict[typing.Any, typing.Any],
+        map: dict[typing.Any, typing.Any],
+        variables: dict[typing.Any, typing.Any] | None = None,
+    ):
+        # Request type: form data
         graphql_resp = self.client.post(
             "/graphql/",
             headers=self.headers,
-            json={
-                "query": query,
-                "variables": variables,
+            files=files,
+            data={
+                "operations": json.dumps(
+                    {
+                        "query": query,
+                        "variables": variables,
+                    },
+                ),
+                "map": json.dumps(map),
             },
         )
 
+        if not (200 <= graphql_resp.status_code < 300):
+            logger.error("Error: %s", graphql_resp.text)
         graphql_resp.raise_for_status()
 
         return graphql_resp.json()
 
+    def graphql_request(
+        self,
+        operation_name: str,
+        query: str,
+        variables: dict[typing.Any, typing.Any] | None = None,
+    ):
+        payload = {
+            "operationName": operation_name,
+            "query": query,
+            "variables": variables,
+        }
 
-with MapswipeApi() as api:
-    print('Public endpoints')
+        graphql_resp = self.client.post(
+            "/graphql/",
+            headers=self.headers,
+            json=payload,
+        )
 
-    print(
-        api.graphql_request(
+        if not (200 <= graphql_resp.status_code < 300):
+            logger.error("Error: %s", graphql_resp.text)
+        graphql_resp.raise_for_status()
+
+        return graphql_resp.json()
+
+    def create_draft_project(self, params):
+        resp = self.graphql_request(
+            Query.CREATE_DRAFT_PROJECTS_OP_NAME,
+            Query.CREATE_DRAFT_PROJECTS,
+            {"data": params},
+        )
+
+        if errors := resp.get("errors"):
+            logger.error("Failed to create new project: %s", errors)
+            return None
+
+        if errors := resp["data"]["createProject"].get("messages"):
+            logger.error("Failed to create new project: %s", errors)
+            return None
+
+        if errors := resp["data"]["createProject"].get("errors"):
+            logger.error("Failed to create new project: %s", errors)
+            return None
+
+        return resp["data"]["createProject"]["result"]["id"]
+
+    def create_project_asset(
+        self,
+        *,
+        project_file,
+        params,
+    ):
+        resp = self.graphql_request_with_files(
+            Query.CREATE_PROJECT_ASSET_OP_NAME,
+            Query.CREATE_PROJECT_ASSET,
+            files={
+                "projectFile": project_file,
+            },
+            map={
+                "projectFile": ["variables.data.file"],
+            },
+            variables={"data": params},
+        )
+
+        if errors := resp.get("errors"):
+            logger.error("Failed to create project asset: %s", errors)
+            return None
+
+        if errors := resp["data"]["createProjectAsset"].get("messages"):
+            logger.error("Failed to create project asset: %s", errors)
+            return None
+
+        if errors := resp["data"]["createProjectAsset"].get("errors"):
+            logger.error("Failed to create project asset: %s", errors)
+            return None
+
+        return resp["data"]["createProjectAsset"]["result"]["id"]
+
+
+with MapSwipeApiClient() as api_client:
+    logger.info("Public endpoints")
+
+    logger.info(
+        "%s: %s",
+        Query.PUBLIC_PROJECTS_OP_NAME,
+        api_client.graphql_request(
+            Query.PUBLIC_PROJECTS_OP_NAME,
             Query.PUBLIC_PROJECTS,
             variables={
                 "filters": {
@@ -267,10 +455,57 @@ with MapswipeApi() as api:
                     }
                 }
             },
-        )
+        ),
     )
 
-    print('Private endpoints')
-    print(api.graphql_request(Query.ME))
+    logger.info("Private endpoints")
+    me_info = api_client.graphql_request(Query.ME_OP_NAME, Query.ME)["data"]["me"]
+    if not me_info:
+        raise Exception("Not logged in.... :(")
+    logger.info("%s: %s", Query.ME_OP_NAME, me_info)
 
-    print(api.graphql_request(Query.PROJECTS))
+    organization_id = api_client.graphql_request(
+        Query.ORGANIZATIONS_OP_NAME,
+        Query.ORGANIZATIONS,
+    )["data"]["organizations"]["results"][0]["id"]
+
+    logger.info(
+        "%s: %s",
+        Query.PUBLIC_PROJECTS_OP_NAME,
+        api_client.graphql_request(Query.PROJECTS_OP_NAME, Query.PROJECTS),
+    )
+
+    new_project_client_id = str(ULID())
+    new_project_topic_name = "Test - Building Validation - 8"
+
+    new_project_id = api_client.create_draft_project(
+        {
+            "clientId": new_project_client_id,
+            "projectType": "VALIDATE",
+            "region": "Nepal",
+            "topic": new_project_topic_name,
+            "description": "Validate building footprints",
+            "projectInstruction": "Validate building footprints",
+            "lookFor": "buildings",
+            "projectNumber": 1000,
+            "requestingOrganization": organization_id,
+            "additionalInfoUrl": "fair-dev.hotosm.org",
+            "team": None,
+        }
+    )
+    assert new_project_id is not None
+
+    logger.info("%s: %s", "Create Draft Project", new_project_id)
+
+    with open("./sample_image.png", "rb") as image_file:
+        new_project_asset_client_id = str(ULID())
+        new_project_asset = api_client.create_project_asset(
+            project_file=image_file,
+            params={
+                "inputType": "COVER_IMAGE",
+                "clientId": new_project_asset_client_id,
+                "project": new_project_id,
+            },
+        )
+
+        logger.info("%s: %s", "Create Project Asset", new_project_asset)
