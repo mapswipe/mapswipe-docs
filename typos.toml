@@ -1,0 +1,13 @@
+[default]
+extend-ignore-re = [
+    # Ignore link
+    '.*\(\/assets\/(docs|project_sample_data)\/.*\).*',
+    # Raw data
+    '.*"projectId": ".*',
+    '.*"tutorialId": ".*',
+    '.*"requestingOrganisation": ".*',
+    '.*"name": ".*',
+]
+
+[files]
+extend-exclude = ["assets/*"]
