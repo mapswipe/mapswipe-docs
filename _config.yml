@@ -1,0 +1,5 @@
+markdown: GFM
+repository: mapswipe/mapswipe-docs
+
+plugins:
+  - jekyll-gfm-admonitions
