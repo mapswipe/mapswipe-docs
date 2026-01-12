@@ -1,2 +1,8 @@
 https://slack.com/shortcuts/Ft09CHNNHZNX/8d0d6f7d69a1350a91b2ef33fc6d5704
+https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword
 https://www.mdpi.com/2072-4292/8/10/859
+
+# 404
+https:\/\/backend-(\d+)\.mapswipe\.dev\.togglecorp\.com
+https://backend-stage.mapswipe.org
+https://backend.mapswipe.org
