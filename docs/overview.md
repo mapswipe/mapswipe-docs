@@ -14,7 +14,7 @@
 ### Old Architecture
 <figure>
     <IMG
-		 src="/assets/images/overview/old_architecture.png"
+		 src="/assets/docs/overview/images/old_architecture.png"
 		 alt="Prev arch"/>
     <figcaption>Previous MapSwipe Architectural Flow</figcaption>
 </figure>
@@ -31,7 +31,7 @@ Furthermore, A background worker periodically synchronized (partially) the 2 dat
 ### New Architecture
 <figure>
     <IMG
-		 src="/assets/images/overview/new_architecture.png"
+		 src="/assets/docs/overview/images/new_architecture.png"
 		 alt="New architecture"/>
     <figcaption>New MapSwipe Architectural Flow</figcaption>
 </figure>
