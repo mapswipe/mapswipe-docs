@@ -439,73 +439,86 @@ class MapSwipeApiClient:
         return resp["data"]["createProjectAsset"]["result"]["id"]
 
 
-with MapSwipeApiClient() as api_client:
-    logger.info("Public endpoints")
+def run():
+    with MapSwipeApiClient() as api_client:
+        logger.info("Public endpoints")
 
-    logger.info(
-        "%s: %s",
-        Query.PUBLIC_PROJECTS_OP_NAME,
-        api_client.graphql_request(
+        logger.info(
+            "%s: %s",
             Query.PUBLIC_PROJECTS_OP_NAME,
-            Query.PUBLIC_PROJECTS,
-            variables={
-                "filters": {
-                    "status": {
-                        "exact": "FINISHED",
+            api_client.graphql_request(
+                Query.PUBLIC_PROJECTS_OP_NAME,
+                Query.PUBLIC_PROJECTS,
+                variables={
+                    "filters": {
+                        "status": {
+                            "exact": "FINISHED",
+                        }
                     }
-                }
-            },
-        ),
-    )
-
-    logger.info("Private endpoints")
-    me_info = api_client.graphql_request(Query.ME_OP_NAME, Query.ME)["data"]["me"]
-    if not me_info:
-        raise Exception("Not logged in.... :(")
-    logger.info("%s: %s", Query.ME_OP_NAME, me_info)
-
-    organization_id = api_client.graphql_request(
-        Query.ORGANIZATIONS_OP_NAME,
-        Query.ORGANIZATIONS,
-    )["data"]["organizations"]["results"][0]["id"]
-
-    logger.info(
-        "%s: %s",
-        Query.PUBLIC_PROJECTS_OP_NAME,
-        api_client.graphql_request(Query.PROJECTS_OP_NAME, Query.PROJECTS),
-    )
-
-    new_project_client_id = str(ULID())
-    new_project_topic_name = "Test - Building Validation - 8"
-
-    new_project_id = api_client.create_draft_project(
-        {
-            "clientId": new_project_client_id,
-            "projectType": "VALIDATE",
-            "region": "Nepal",
-            "topic": new_project_topic_name,
-            "description": "Validate building footprints",
-            "projectInstruction": "Validate building footprints",
-            "lookFor": "buildings",
-            "projectNumber": 1000,
-            "requestingOrganization": organization_id,
-            "additionalInfoUrl": "fair-dev.hotosm.org",
-            "team": None,
-        }
-    )
-    assert new_project_id is not None
-
-    logger.info("%s: %s", "Create Draft Project", new_project_id)
-
-    with open("./sample_image.png", "rb") as image_file:
-        new_project_asset_client_id = str(ULID())
-        new_project_asset = api_client.create_project_asset(
-            project_file=image_file,
-            params={
-                "inputType": "COVER_IMAGE",
-                "clientId": new_project_asset_client_id,
-                "project": new_project_id,
-            },
+                },
+            ),
         )
 
-        logger.info("%s: %s", "Create Project Asset", new_project_asset)
+        logger.info("Private endpoints")
+        me_info = api_client.graphql_request(Query.ME_OP_NAME, Query.ME)["data"]["me"]
+        if not me_info:
+            raise Exception("Not logged in.... :(")
+        logger.info("%s: %s", Query.ME_OP_NAME, me_info)
+
+        organization_id = api_client.graphql_request(
+            Query.ORGANIZATIONS_OP_NAME,
+            Query.ORGANIZATIONS,
+        )["data"]["organizations"]["results"][0]["id"]
+
+        logger.info(
+            "%s: %s",
+            Query.PUBLIC_PROJECTS_OP_NAME,
+            api_client.graphql_request(Query.PROJECTS_OP_NAME, Query.PROJECTS),
+        )
+
+        new_project_client_id = str(ULID())
+        new_project_topic_name = "Test - Building Validation - 8"
+
+        logger.warning(
+            "You are about to create projects in %s. This may modify the environment.",
+            api_client.BASE_URL,
+        )
+        confirmation = input('Proceed? Type "yes" to continue: ').strip().lower()
+        if confirmation != "yes":
+            logger.warning("Operation cancelled. No changes were made.")
+            return None
+
+        new_project_id = api_client.create_draft_project(
+            {
+                "clientId": new_project_client_id,
+                "projectType": "VALIDATE",
+                "region": "Nepal",
+                "topic": new_project_topic_name,
+                "description": "Validate building footprints",
+                "projectInstruction": "Validate building footprints",
+                "lookFor": "buildings",
+                "projectNumber": 1000,
+                "requestingOrganization": organization_id,
+                "additionalInfoUrl": "fair-dev.hotosm.org",
+                "team": None,
+            }
+        )
+        assert new_project_id is not None
+
+        logger.info("%s: %s", "Create Draft Project", new_project_id)
+
+        with open("./sample_image.png", "rb") as image_file:
+            new_project_asset_client_id = str(ULID())
+            new_project_asset = api_client.create_project_asset(
+                project_file=image_file,
+                params={
+                    "inputType": "COVER_IMAGE",
+                    "clientId": new_project_asset_client_id,
+                    "project": new_project_id,
+                },
+            )
+
+            logger.info("%s: %s", "Create Project Asset", new_project_asset)
+
+
+run()
