@@ -5,6 +5,10 @@ This script is provided as an example for interacting with the MapSwipe backend.
 > [!CAUTION]
 > Ongoing updates to the backend might render this script **out-of-date**.
 
+## Real-world usage
+
+- https://github.com/hotosm/fAIr/blob/develop/backend/core/mapswipe_client.py
+
 ## Getting started
 
 > [!NOTE]
