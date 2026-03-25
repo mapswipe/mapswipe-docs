@@ -14,6 +14,11 @@ This script is provided as an example for interacting with the MapSwipe backend.
 > [!NOTE]
 > You will need Manager account credentials to run this script.
 
+> [!IMPORTANT]
+> You do not need manager account credentials for read-only access. \
+> After setting `ENABLE_AUTHENTICATION` to `false`, you can run the read-only part of the script. \
+> https://github.com/mapswipe/mapswipe-docs/blob/28fb662442eb05332b7fc56dc104d3eca114e9e3/examples/mapswipe-backend-api/run.py#L444-L460
+
 - Create `.env` file.
 - Define the following variables:
     - `MANAGER_URL`: URL for Manager Dashboard
@@ -63,6 +68,10 @@ FB_USERNAME=me@example.com
 FB_PASSWORD=my-very-good-password
 ```
 
+> [!CAUTION]
+> This will create dummy projects in the staging environment set in the [script](run.py ).
+
+
 ### Production Instance
 
 Your final `.env` for production instance should look like this:
@@ -79,6 +88,9 @@ FB_USERNAME=me@example.com
 FB_PASSWORD=my-very-good-password
 ```
 
+> [!CAUTION]
+> Do not use this credential with the [provided script](run.py ), as it will create dummy projects in the production environment.
+
 ## Running the script
 
 Run the example script using uv
@@ -89,3 +101,8 @@ uv run run.py
 
 > [!NOTE]
 > To install uv, visit https://docs.astral.sh/uv/getting-started/installation/
+
+## To Generate GraphQL Query
+
+Use the running alpha instance to create the queries you need:
+https://backend-2.mapswipe.dev.togglecorp.com/graphiql/
