@@ -106,3 +106,7 @@ uv run run.py
 
 Use the running alpha instance to create the queries you need:
 https://backend-2.mapswipe.dev.togglecorp.com/graphiql/
+
+## Legacy datasets
+
+Access the legacy datasets here: [assets/legacy-datasets](/assets/legacy-datasets)
