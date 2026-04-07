@@ -194,8 +194,14 @@ General points of attention while creating a project:
 - Re-read, correct and improve the description given through the request.
 - Check if the image is the good format and if the size is not to big - max 1MB. The image will be show as a thumbnail for your project.
 - Check the imagery selected available for the area, we learned that good imagery is key to keep a project going. If the imagery is not good enough or covered by clouds adjust the area. You need to zoom in till level 18.
-- Max area for project type in km2 is calculated with this formula: ```5 * (4 ** (23 - zoom_level))```
-    - At zoom level 14, the maximum area is calculated using the formula 5 × (4^(23 − zoom_level)), which results in a value that is approximately equal to the size of Peru. Based on this calculation, the MAX_AOI_GEOMETRY_AREA is set to 1,310,720.
+- Max area for project type in km2 as per project types
+    - The max area for **View Streets** project type is capped at 20 sq km.
+    - The max area for **Validate Footprints** is capped at 2,500 sq km. It includes all 3 options: geojson upload, geojson external link, HOT tasking manager ID (TMID)
+    - The max area for **Find Features**, **Compare Dates**, and **Check Completeness** project types are calculated using the formula: ```5 * (4 ** (23 - zoom_level))```
+        - Min zoom level supported: 14
+            - At zoom level 14, the sq km value results approximately equal to the size of Peru. Based on this calculation, the MAX_AOI_GEOMETRY_AREA is set to 1,310,720 sq km.
+        - Max zoom level supported: 23
+            - At zoom level 23, the sq km value results to 5 sq km.
 
 **For Find Features, Check Completeness and Compare Dates projects:**
 - MapSwipe can only process geographical areas up to km2 calculated from the above formula. Check if the GeoJSON you received has this size. If not, you may need to split up the area into multiple pieces, and create more than one MapSwipe project out of the area.
