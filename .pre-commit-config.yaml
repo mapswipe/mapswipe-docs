@@ -1,12 +1,11 @@
 repos:
-  # - repo: https://github.com/lycheeverse/lychee.git
-  #   rev: v0.15.1
-  #   hooks:
-  #     - id: lychee
-  #       args:
-  #         - "--no-progress"
-  #         - "."
-  #       pass_filenames: false
+  - repo: https://github.com/lycheeverse/lychee
+    rev: lychee-v0.24.1
+    hooks:
+      - id: lychee
+        files: \.md$
+        args: ["--no-progress", "--root-dir=.", "."]
+        pass_filenames: false
 
   - repo: https://github.com/crate-ci/typos
     rev: v1.31.1

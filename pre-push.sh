@@ -24,16 +24,7 @@ if ! command -v pre-commit &>/dev/null; then
   exit 1
 fi
 
-if ! command -v lychee &>/dev/null; then
-  log_error "lychee is not installed."
-  log_error "Follow https://github.com/lycheeverse/lychee#installation"
-  exit 1
-fi
-
 echo "▶️ Running pre-commit"
 pre-commit run --color=always --all-files
-
-echo "▶️ Running lychee"
-lychee --root-dir $(pwd)/ ./
 
 log_success "✅ All good"
