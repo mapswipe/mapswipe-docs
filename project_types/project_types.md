@@ -21,6 +21,10 @@ The MapSwipe backend now supports 6 **project types**. Each project type formula
 ## Data Model
 This way of formulating the overall crowdsourcing challenge and it's subcomponents shapes the **data model** we use.
 
+Below you can see the structure on the example of a Find Features project type. The project manager supplies a bounding polygon, which is then divided into multiple groups, which are in turn divided into multiple tasks. Results are always bound to a task and what a result means differs by project type.
+
+![](/assets/project_types/project_types/mapswipe_data_model.png)
+
 With the revamp, as a project manager you have to care about the project. The information you provide through the **Manager Dashboard** will be used to set up your project. You should provide the following information.
 
 ### Projects
