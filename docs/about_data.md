@@ -37,13 +37,13 @@ The export contains data of all the projects in MapSwipe.
 | status                         | integer | Numeric code representing the project status (e.g., 30=Processing Failed, 40=Processed, 70=Withdrawn, 75=Finished, 80=Discarded).                                                                      |
 | status_display                 | string  | Human-readable status of the project, corresponding to the status code (e.g., "Processing Failed", "Processed", "Withdrawn", "Finished", "Discarded").                                                 |
 | area_sqkm                      | float   | The size of the project area in square kilometers.                                                                                                                                                     |
-| centroid                       | string  | The centroid of the project geometry as WKT geometry (often empty in the provided data).                                                                                                               |
+| centroid                       | string  | The centroid of the project geometry as a WKT POINT (EPSG:4326), e.g. `POINT(3.6169 6.6249)`.                                                                                                          |
 | geom                           | string  | The geometry of the project region as WKT geometry, prefixed with SRID=4326 and wrapped in GEOMETRYCOLLECTION (e.g., "SRID=4326;GEOMETRYCOLLECTION (POLYGON (...))").                                  |
-| progress                       | float   | The mapping progress of the project indicating incomplete or unstarted projects.                                                                                                                       |
+| progress                       | float   | The mapping progress of the project as a fraction (0.0 = none, 1.0 = complete).                                                                                                                        |
 | number_of_contributor_users    | integer | The number of distinct users who contributed to this project.                                                                                                                                          |
 | number_of_results              | integer | The total number of results for all tasks.                                                                                                                                                             |
 | number_of_results_for_progress | integer | The number of results considered for progress calculation, excluding redundant mappings.                                                                                                               |
-| last_contribution_date         | string  | The date of the last contribution to the project (empty in the provided data).                                                                                                                         |
+| last_contribution_date         | string  | The date of the most recent contribution to the project (YYYY-MM-DD).                                                                                                                                  |
 
 #### New Additions in New Architecture
 The following fields have been added in the export after the architecture revamp
@@ -52,37 +52,47 @@ The following fields have been added in the export after the architecture revamp
 - **status_display**: Human-readable project state (Finished, Withdrawn, Discarded…).
 
 ### Export: projects_geom.geojson
-This export contains MapSwipe projects with the following information.
+A GeoJSON `FeatureCollection` with one `Feature` per MapSwipe project. Each feature carries the same metadata as `projects.csv` (minus `geom`, since the geometry is on the feature itself) and a `geometry` of type `GeometryCollection`.
 
-- Name: Project title with type, location, and organization.
-- Look For: The feature volunteers should identify (e.g., buildings, roads, people).
-- Type: Project category: Find Features, Assess Images, Compare Dates, View Streets.
-- Status: Active, Finished, Withdrawn, or Processed.
-- Area: Project size in km² (if available).
-- Image: Sample image illustrating the task.
-
-| Name                          | Type          | Look For    | Status    | Area (km²) |
-| ----------------------------- | ------------- | ----------- | --------- | ---------- |
-| Find Buildings in Manbhawan   | Find Features | Buildings   | Withdrawn | 0.004      |
-| Validate Image - Mustang      | Assess IMages | Person      | Processed | –          |
-| View Streets - Antsirabe      | View Streets  | Paved Roads | Withdrawn | 3.37       |
-| Find Affected Areas - Pokhara | Find Features | House       | Finished  | 6.49       |
-| Compare - Earthquake Impact   | Compare Dates | House       | Processed | 11.08      |
 #### File
 - `projects_geom.geojson`, e.g. [projects_geom.geojson](/assets/docs/about_data/files/global_exports/projects_geom.geojson)
+
+| Name                           | Type    | Description                                                                                                                                                                       |
+| ------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                             | string  | The numeric project ID, serialized as a string in GeoJSON properties.                                                                                                             |
+| firebase_id                    | string  | The alphanumeric ID of the project from the old Firebase system.                                                                                                                  |
+| name                           | string  | The name of the project as displayed in the app.                                                                                                                                  |
+| description                    | string  | The project description displayed in the app on the project page.                                                                                                                 |
+| look_for                       | string  | What users should look for in the project (e.g., buildings, houses, paved roads).                                                                                                 |
+| project_type                   | string  | The project type code (serialized as a string), e.g. `1`=Find features, `2`=Validate footprints, `3`=Compare dates, `4`=Check completeness, `7`=View streets, `10`=Assess Images. |
+| project_type_display           | string  | Human-readable name of the project type.                                                                                                                                          |
+| organization_name              | string  | The name of the organization requesting the project.                                                                                                                              |
+| image_url                      | string  | URL to the project image displayed in the app.                                                                                                                                    |
+| created_at                     | string  | When the project was created, ISO timestamp with timezone.                                                                                                                        |
+| status                         | string  | Project status code (serialized as a string), e.g. `30`=Processing Failed, `40`=Processed, `70`=Withdrawn, `75`=Finished, `80`=Discarded.                                         |
+| status_display                 | string  | Human-readable project status.                                                                                                                                                    |
+| area_sqkm                      | string  | Project area in square kilometers, serialized as a string.                                                                                                                        |
+| centroid                       | string  | Centroid of the project geometry as WKT POINT (EPSG:4326).                                                                                                                        |
+| progress                       | string  | Project progress as a fraction (0.0 – 1.0), serialized as a string.                                                                                                               |
+| number_of_contributor_users    | string  | Distinct users who contributed to this project, serialized as a string.                                                                                                           |
+| number_of_results              | string  | Total swipes submitted across all of the project's tasks, serialized as a string.                                                                                                 |
+| number_of_results_for_progress | string  | Swipes that count toward progress (excludes redundant mappings beyond the required threshold), serialized as a string.                                                            |
+| last_contribution_date         | string  | Date of the most recent contribution to the project (YYYY-MM-DD).                                                                                                                 |
+
+The feature's `geometry` is a `GeometryCollection` containing the project's area-of-interest polygon(s) in EPSG:4326.
 
 #### New Additions in New Architecture
 The following fields have been added in the export after the architecture revamp
 - **project_type_display**: Short name of the task type (e.g., "Find Features", "Validate Footprints").
 - **status_display**: Human-readable project state (Finished, Withdrawn, Discarded…).
-- **number_of_contributors**: Total unique volunteers who tapped on this project.
+- **number_of_contributor_users**: Total unique volunteers who tapped on this project.
 - **number_of_results**: Every single swipe ever made in the project.
 - **number_of_results_for_progress**: Swipes that actually moved the progress bar (excludes extras).
 - **last_contribution_date**: Date of the most recent swipe (YYYY-MM-DD).
 - **progress**: % of the area fully mapped (0.0 = 0%, 1.0 = 100%).
 
 ### Export: projects_centroid.geojson
-This export is similar to the export with projects_geom.geojson
+Same `FeatureCollection` and property schema as [`projects_geom.geojson`](#export-projects_geomgeojson), but each feature's `geometry` is a single `Point` (the project centroid) instead of a `GeometryCollection` of polygons. Use this when you want a lightweight overview map without the full project boundaries.
 
 #### File
 - `projects_centroid.geojson`, e.g. [projects_centroid.geojson](/assets/docs/about_data/files/global_exports/projects_centroid.geojson)
@@ -116,21 +126,29 @@ This gives you the unfiltered MapSwipe results. This is most suited if you want 
 - `agg_results_by_task_{project_id}.csv`, e.g. [agg_results_by_task_2962.csv](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962.csv)
 - `agg_results_by_task_{project_id}_geom.geojson`, e.g. [agg_results_by_task_2962_geom.geojson](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962_geom.geojson) (feature geometry is a `MultiPolygon`)
 
-| Name        | Type     | Description                                                                                                                                                                                                                                                    |
-|-------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| idx         |  integer | -                                                                                                                                                                                                                                                              |
-| task_id     | string   | The ID of the task, for BuildArea projects this is a composition of `TileZ-TileX-TileY`                                                                                                                                                                        |
-| 0_count     | integer  | The number of users who marked this task as 0, e.g. "no building" for BuildArea Project Type.                                                                                                                                                                  |
-| 1_count     | integer  | The number of users who marked this task as 1, e.g. "building" for BuildArea Project Type.                                                                                                                                                                     |
-| 2_count     | integer  | The number of users who marked this task as 2, e.g. "maybe" for BuildArea Project Type.                                                                                                                                                                        |
-| 3_count     | integer  | The number of users who marked this task as 3, e.g. "bad imagery" for BuildArea Project Type.                                                                                                                                                                  |
-| total_count | integer  | The total number of users who mapped this task.                                                                                                                                                                                                                |
-| 0_share     | float    | 0_count divived by total_count. This gives you the share of all users who marked as 0.                                                                                                                                                                         |
-| 1_share     | float    | 1_count divived by total_count. This gives you the share of all users who marked as 1.                                                                                                                                                                         |
-| 2_share     | float    | 2_count divived by total_count. This gives you the share of all users who marked as 2.                                                                                                                                                                         |
-| 3_share     | float    | 3_count divived by total_count. This gives you the share of all users who marked as 3.                                                                                                                                                                         |
-| agreement   | float    | This is defined as [Scott's Pi](https://en.wikipedia.org/wiki/Scott%27s_Pi) and gives you an understanding of inter-rater reliability. The value is 1.0 if all users agree, e.g. all users classify as "building". If users disagree this value will be lower. |
-| geom        | string   | The geometry of this task as WKT geometry.                                                                                                                                                                                                                     |
+| Name                | Type    | Description                                                                                                                                                                                                                                                   |
+| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| idx                 | integer | Sequential row index.                                                                                                                                                                           |
+| task_id             | string  | The ID of the task. For tile-based project types (e.g. Find Features) this is a composition of `TileZ-TileX-TileY`.                                                                             |
+| 0_count             | integer | The number of users who marked this task as 0, e.g. "no building" for Find Features.                                                                                                            |
+| 1_count             | integer | The number of users who marked this task as 1, e.g. "building" for Find Features.                                                                                                               |
+| 2_count             | integer | The number of users who marked this task as 2, e.g. "maybe" for Find Features.                                                                                                                  |
+| 3_count             | integer | The number of users who marked this task as 3, e.g. "bad imagery" for Find Features.                                                                                                            |
+| total_count         | integer | The total number of users who mapped this task.                                                                                                                                                 |
+| 0_share             | float   | `0_count` divided by `total_count`. This gives you the share of all users who marked as 0.                                                                                                      |
+| 1_share             | float   | `1_count` divided by `total_count`. This gives you the share of all users who marked as 1.                                                                                                      |
+| 2_share             | float   | `2_count` divided by `total_count`. This gives you the share of all users who marked as 2.                                                                                                      |
+| 3_share             | float   | `3_count` divided by `total_count`. This gives you the share of all users who marked as 3.                                                                                                      |
+| agreement           | float   | [Scott's Pi](https://en.wikipedia.org/wiki/Scott%27s_Pi) inter-rater reliability. 1.0 means all users agreed; lower values indicate disagreement. Empty when only one user has mapped the task. |
+| quadkey             | string  | Bing Maps quadkey identifying the tile (tile-based project types only).                                                                                                                         |
+| project_internal_id | integer | The internal numeric project ID.                                                                                                                                                                |
+| group_internal_id   | integer | The internal numeric group ID for the group this task belongs to.                                                                                                                               |
+| task_internal_id    | integer | The internal numeric task ID.                                                                                                                                                                   |
+| geom                | string  | (CSV only) The geometry of this task as WKT (MULTIPOLYGON, EPSG:4326).                                                                                                                          |
+| tile_z              | integer | Tile zoom level (tile-based project types only).                                                                                                                                                |
+| tile_x              | integer | Tile X index (tile-based project types only).                                                                                                                                                   |
+| tile_y              | integer | Tile Y index (tile-based project types only).                                                                                                                                                   |
+| url                 | string  | URL to the satellite imagery tile shown to users (tile-based project types only).                                                                                                               |
 
 Additionally, project type specific data can be found here. E.g. Validate projects which were created based on OSM data, will have data describing the original OSM object included.
 
@@ -153,14 +171,17 @@ This gives you data on the users which contributed to a project.
 #### File
 - `users_{project_id}.csv`, e.g. [users_2962.csv](/assets/docs/about_data/files/project_exports/users_2962.csv)
 
-| Name                      | Type    | Description                                                                                                                                                      |
-|---------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| idx                       | integer | -                                                                                                                                                                |
-| groups_completed          | integer | Number of groups completed                                                                                                                                       |
-| total_contributions       | integer | Number of tasks completed                                                                                                                                        |
-| agreeing_contributions    | integer | Tasks with the same result as the final result (e.g. Tile has buildings).                                                                                        |
-| disagreeing_contributions | integer | Tasks with other result as the final result.                                                                                                                     |
-| simple_agreement_score    | float   | Share of tasks which had the same result as the final result. E.g. 0.8 would mean that the user labeled 80% of the tiles the same way as the majority of voters. |
+| Name                        | Type      | Description                                                                                                                                                                   |
+| --------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| idx                         | integer   | Sequential row index.                                                                                                                                                         |
+| project_id                  | string    | The project identifier. Usually a ULID for projects created in the new system; older projects migrated from the previous system may keep their legacy Firebase-style id here. |
+| user_id                     | string    | The Firebase user ID of the contributor.                                                                                                                                      |
+| username                    | string    | The display name of the contributor.                                                                                                                                          |
+| groups_completed            | integer   | Number of groups the user completed.                                                                                                                                          |
+| total_contributions         | integer   | Number of individual tasks the user completed.                                                                                                                                |
+| agreeing_contributions      | integer   | Tasks where the user's result matches the aggregated result (e.g. tile has buildings).                                                                                        |
+| disagreeing_contributions   | integer   | Tasks where the user's result differs from the aggregated result.                                                                                                             |
+| simple_agreement_score      | float     | Share of the user's tasks that match the aggregated result. E.g. 0.8 means the user agreed with the majority on 80% of tiles. Empty if not yet computable.                    |
 
 ### Groups
 This provides data on groups, their tasks, and progress for a specific project.
@@ -168,16 +189,23 @@ This provides data on groups, their tasks, and progress for a specific project.
 #### File
 - `groups_{project_id}.csv`, e.g. [groups_2962.csv](/assets/docs/about_data/files/project_exports/groups_2962.csv)
 
-| Name                     | Type    | Description                                                               |
-| ------------------------ | ------- | ------------------------------------------------------------------------- |
-| project_id               | string  | Unique identifier for the project to which the group belongs.             |
-| group_id                 | string  | Unique identifier for the group within the project.                       |
-| number_of_tasks          | integer | Total number of tasks assigned to the group.                              |
-| finished_count           | integer | Number of tasks in the group that have been completed.                    |
-| required_count           | integer | Number of contributions required per task for completion.                 |
-| progress                 | float   | Progress of the group’s tasks, likely as a fraction (e.g., 0.0 for none). |
-| project_type_specifics   | string  | JSON string containing additional details like groupId, coordinates, etc. |
-| number_of_users_required | integer | Number of users required to contribute to the group’s tasks.              |
+| Name                     | Type    | Description                                                                                                 |
+| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------- |
+| group_internal_id        | integer | Internal numeric ID of the group.                                                                           |
+| project_internal_id      | integer | Internal numeric ID of the project.                                                                         |
+| group_id                 | string  | Public group identifier within the project (e.g. `g155`).                                                   |
+| project_id               | string  | The project identifier. Usually a ULID for new projects; legacy Firebase-style for older migrated projects. |
+| number_of_tasks          | integer | Total number of tasks in the group.                                                                         |
+| required_count           | integer | Number of contributions required per task for completion.                                                   |
+| finished_count           | integer | Number of contributions submitted toward the group's tasks.                                                 |
+| progress                 | float   | Group progress as a fraction (0.0 = none, 1.0 = complete).                                                  |
+| total_area               | float   | Combined area covered by the group's tasks, in square kilometers.                                           |
+| time_spent_max_allowed   | float   | Maximum allowed mapping time for the group, in seconds.                                                     |
+| number_of_users_required | integer | Number of distinct users required to contribute to the group's tasks.                                       |
+| x_max                    | integer | Maximum tile X index across the group's tasks (tile-based project types only).                              |
+| x_min                    | integer | Minimum tile X index across the group's tasks (tile-based project types only).                              |
+| y_max                    | integer | Maximum tile Y index across the group's tasks (tile-based project types only).                              |
+| y_min                    | integer | Minimum tile Y index across the group's tasks (tile-based project types only).                              |
 
 
 ### History
@@ -186,16 +214,19 @@ This tracks daily results, progress, and user contributions for a specific proje
 #### File
 - `history_{project_id}.csv`, e.g. [history_2962.csv](/assets/docs/about_data/files/project_exports/history_2962.csv)
 
-| Name                     | Type    | Description                                                               |
-| ------------------------ | ------- | ------------------------------------------------------------------------- |
-| project_id               | string  | Unique identifier for the project to which the group belongs.             |
-| group_id                 | string  | Unique identifier for the group within the project.                       |
-| number_of_tasks          | integer | Total number of tasks assigned to the group.                              |
-| finished_count           | integer | Number of tasks in the group that have been completed.                    |
-| required_count           | integer | Number of contributions required per task for completion.                 |
-| progress                 | float   | Progress of the group’s tasks, likely as a fraction (e.g., 0.0 for none). |
-| project_type_specifics   | string  | JSON string containing additional details like groupId, coordinates, etc. |
-| number_of_users_required | integer | Number of users required to contribute to the group’s tasks.              |
+| Name                            | Type    | Description                                                                                                  |
+| ------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| day                             | string  | The day this row aggregates, in `YYYY-MM-DD` format.                                                         |
+| number_of_results               | integer | Total swipes submitted on this day.                                                                          |
+| number_of_results_progress      | integer | Swipes from this day that count toward progress (excludes redundant mappings beyond the required threshold). |
+| cum_number_of_results           | integer | Running total of all swipes submitted up to and including this day.                                          |
+| cum_number_of_results_progress  | integer | Running total of progress-counting swipes up to and including this day.                                      |
+| progress                        | float   | Project progress gained on this day (delta), as a fraction.                                                  |
+| cum_progress                    | float   | Cumulative project progress up to and including this day, as a fraction (0.0 = 0%, 1.0 = 100%).              |
+| number_of_users                 | integer | Distinct users who contributed on this day.                                                                  |
+| number_of_new_users             | integer | Users who contributed for the first time on this day.                                                        |
+| cum_number_of_users             | integer | Cumulative distinct users who have contributed up to and including this day.                                 |
+| project_id                      | string  | The project identifier. Usually a ULID for new projects; legacy Firebase-style for older migrated projects.  |
 
 
 ### Results
@@ -204,16 +235,23 @@ This details individual task contributions, timings, and results by users in gro
 #### File
 - `results_{project_id}.csv`, e.g. [results_2962.csv](/assets/docs/about_data/files/project_exports/results_2962.csv)
 
-| Name       | Type    | Description                                                                  |
-| ---------- | ------- | ---------------------------------------------------------------------------- |
-| project_id | string  | Unique identifier for the project to which the result belongs.               |
-| group_id   | string  | Identifier for the group containing the task.                                |
-| user_id    | string  | Unique identifier for the user who completed the task.                       |
-| task_id    | string  | Identifier for the specific task, often in format like zoom-x-y coordinates. |
-| timestamp  | string  | Timestamp when the result was recorded (in YYYY-MM-DD HH:MM:SS format).      |
-| start_time | string  | Start time of the task (in YYYY-MM-DD HH:MM:SS format).                      |
-| end_time   | string  | End time of the task (in YYYY-MM-DD HH:MM:SS format).                        |
-| result     | integer | The outcome or classification result of the task (e.g., 0 for negative).     |
+| Name                | Type    | Description                                                                                                    |
+| ------------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
+| project_internal_id | integer | Internal numeric ID of the project.                                                                            |
+| group_internal_id   | integer | Internal numeric ID of the group containing the task.                                                          |
+| task_internal_id    | integer | Internal numeric ID of the task.                                                                               |
+| user_internal_id    | integer | Internal numeric ID of the user.                                                                               |
+| project_id          | string  | The project identifier. Usually a ULID for new projects; legacy Firebase-style for older migrated projects.    |
+| group_id            | string  | Public group identifier within the project (e.g. `g183`).                                                      |
+| task_id             | string  | Public task identifier; for tile-based projects formatted as `TileZ-TileX-TileY`.                              |
+| user_id             | string  | The Firebase user ID of the contributor.                                                                       |
+| timestamp           | string  | When the result was recorded (ISO 8601 with timezone).                                                         |
+| start_time          | string  | When the user started the task (ISO 8601 with timezone).                                                       |
+| end_time            | string  | When the user finished the task (ISO 8601 with timezone).                                                      |
+| app_version         | string  | MapSwipe app version that produced the result (e.g. `0.3.2`).                                                  |
+| client_type         | string  | Client used to submit (e.g. `web`, `mobile`).                                                                  |
+| result              | integer | The classification submitted by the user (e.g. 0 = no, 1 = yes, 2 = maybe, 3 = bad imagery for Find Features). |
+| username            | string  | The display name of the contributor.                                                                           |
 
 
 ### Tasks
@@ -221,15 +259,28 @@ This lists tasks, their identifiers, groups, and geometric polygons for a specif
 
 #### File
 - `tasks_{project_id}.csv`, e.g. [tasks_2962.csv](/assets/docs/about_data/files/project_exports/tasks_2962.csv)
-| Name       | Type   | Description                                                                                                           |
-| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| project_id | string | Unique identifier for the project to which the task belongs.                                                          |
-| group_id   | string | Identifier for the group containing the task.                                                                         |
-| task_id    | string | Unique identifier for the task, often in format like zoom-x-y coordinates.                                            |
-| geom       | string | Geometric boundary of the task area in WKT (Well-Known Text) MULTIPOLYGON format with longitude-latitude coordinates. |
+
+| Name                | Type    | Description                                                                                                 |
+| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| project_internal_id | integer | Internal numeric ID of the project.                                                                         |
+| group_internal_id   | integer | Internal numeric ID of the group containing the task.                                                       |
+| task_internal_id    | integer | Internal numeric ID of the task.                                                                            |
+| project_id          | string  | The project identifier. Usually a ULID for new projects; legacy Firebase-style for older migrated projects. |
+| group_id            | string  | Public group identifier within the project.                                                                 |
+| task_id             | string  | Public task identifier; for tile-based projects formatted as `TileZ-TileX-TileY`.                           |
+| geom                | string  | Task area as WKT MULTIPOLYGON (EPSG:4326).                                                                  |
+| tile_z              | integer | Tile zoom level (tile-based project types only).                                                            |
+| tile_x              | integer | Tile X index (tile-based project types only).                                                               |
+| tile_y              | integer | Tile Y index (tile-based project types only).                                                               |
+| url                 | string  | URL to the satellite imagery tile shown to users (tile-based project types only).                           |
 
 ### Moderate to High
 This provides GeoJSON polygons representing areas marked as 'yes' or 'maybe' in the project.
 
 #### File
 - `yes_maybe_{project_id}.geojson`, e.g. [yes_maybe_2962.geojson](/assets/docs/about_data/files/project_exports/yes_maybe_2962.geojson)
+
+| Name     | Type     | Description                                                                           |
+| -------- | -------- | ------------------------------------------------------------------------------------- |
+| id       | integer  | A sequential ID for the geometry. It has no connection to the MapSwipe data model.    |
+| geometry | geometry | A polygon geometry representing the merged "yes" / "maybe" area of one or more tasks. |
