@@ -1,3 +1,10 @@
+---
+title: Validate Footprints
+parent: Project Types
+nav_order: 2
+permalink: /project_types/validate_footprints/
+---
+
 # Project Type - Validate Footprints
 
 ## Project

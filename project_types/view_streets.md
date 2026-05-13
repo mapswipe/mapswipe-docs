@@ -1,3 +1,10 @@
+---
+title: View Streets
+parent: Project Types
+nav_order: 6
+permalink: /project_types/view_streets/
+---
+
 # Project Type - View Streets
 
 ## Project

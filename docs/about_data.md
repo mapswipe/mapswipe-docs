@@ -1,3 +1,9 @@
+---
+title: About the Data
+nav_order: 3
+permalink: /docs/about_data/
+---
+
 # About the Data
 Swiping is just the beginning. MapSwipe data is created by our users and accessible to the entire community. Through the [MapSwipe website](https://mapswipe.org/en/data/) you can see where we've mapped, which organizations are requesting data, and how many individuals contribute to our impact. When using MapSwipe data, all you have to do is credit the MapSwipe contributors. Here you find a more detailed description of the data available.
 

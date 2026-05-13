@@ -1,4 +1,10 @@
-#  MapSwipe Overview
+---
+title: Overview
+nav_order: 2
+permalink: /docs/overview/
+---
+
+# MapSwipe Overview
 
 ## A typical MapSwipe workflow
 

@@ -1,3 +1,10 @@
+---
+title: Assess Images
+parent: Project Types
+nav_order: 4
+permalink: /project_types/assess_images/
+---
+
 # Project Type - Assess Images
 ## COCO File Format
 The Assess Images project type is created using the following sample COCO json file, as shown in the [sample dataset](/assets/project_sample_data/assess_images/coco_sample.json).

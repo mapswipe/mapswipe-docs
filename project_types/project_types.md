@@ -1,3 +1,10 @@
+---
+title: Project Types
+nav_order: 5
+has_children: true
+permalink: /project_types/
+---
+
 # MapSwipe Project Types and Data Model
 ## MapSwipe's Crowdsourcing Approach
 The MapSwipe crowdsourcing workflow is designed following an approach already presented by [Albuquerque et al. (2016)](https://www.mdpi.com/2072-4292/8/10/859). The main ideas about MapSwipe's crowdsourcing approach (and many other crowdsourcing tasks) lies in

@@ -1,3 +1,10 @@
+---
+title: Check Completeness
+parent: Project Types
+nav_order: 5
+permalink: /project_types/check_completeness/
+---
+
 # Project Type - Check Completeness
 Similar to the Find Features project, to create a Check Completeness project, you need to add all information and upload a bounding polygon as well as fill in some information about your project.
 

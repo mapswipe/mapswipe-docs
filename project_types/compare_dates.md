@@ -1,3 +1,10 @@
+---
+title: Compare Dates
+parent: Project Types
+nav_order: 3
+permalink: /project_types/compare_dates/
+---
+
 # Project Type - Compare Dates
 
 ## Project

@@ -1,3 +1,9 @@
+---
+title: For Project Managers
+nav_order: 4
+permalink: /docs/for_project_managers/
+---
+
 # For MapSwipe Managers
 
 ## Becoming a project manager

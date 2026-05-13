@@ -1,3 +1,12 @@
+---
+title: MapSwipe Backend API
+parent: Examples and Scripts
+nav_order: 1
+permalink: /examples/mapswipe-backend-api/
+---
+
+# MapSwipe Backend API Example
+
 ## Background
 
 This script is provided as an example for interacting with the MapSwipe backend.

@@ -1,3 +1,10 @@
+---
+title: Find Features
+parent: Project Types
+nav_order: 1
+permalink: /project_types/find_features/
+---
+
 # Project Type - Find Features
 
 ## Project
