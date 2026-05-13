@@ -11,13 +11,17 @@ Swiping is just the beginning. MapSwipe data is created by our users and accessi
 - **projects.csv**
 - **projects_geom.geojson**
 - **projects_centroid.geojson**
-- **project_types_data.csv**
+- **project_stats_by_types.csv**
 
 > [!IMPORTANT]
 > You can download the latest dataset from the website https://mapswipe.org/en/data/ (Search for `Download all projects`)
 
 ### Export: projects.csv
 The export contains data of all the projects in MapSwipe.
+
+#### File
+- `projects.csv`, e.g. [projects.csv](/assets/docs/about_data/files/global_exports/projects.csv)
+
 | Name                           | Type    | Description                                                                                                                                                                                            |
 | ------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | id                             | integer | The numeric ID of the project in the revamped system, replacing the alphanumeric project_id from the old system.                                                                                       |
@@ -64,6 +68,8 @@ This export contains MapSwipe projects with the following information.
 | View Streets - Antsirabe      | View Streets  | Paved Roads | Withdrawn | 3.37       |
 | Find Affected Areas - Pokhara | Find Features | House       | Finished  | 6.49       |
 | Compare - Earthquake Impact   | Compare Dates | House       | Processed | 11.08      |
+#### File
+- `projects_geom.geojson`, e.g. [projects_geom.geojson](/assets/docs/about_data/files/global_exports/projects_geom.geojson)
 
 #### New Additions in New Architecture
 The following fields have been added in the export after the architecture revamp
@@ -78,8 +84,14 @@ The following fields have been added in the export after the architecture revamp
 ### Export: projects_centroid.geojson
 This export is similar to the export with projects_geom.geojson
 
-### Export: projects_stats_by_type.csv
-The newly added export contains aggregated stats for all MapSwipe projects, grouped by the 6 project types, instantly revealing each type’s project count, total area covered, every swipe submitted, and average volunteers per project.
+#### File
+- `projects_centroid.geojson`, e.g. [projects_centroid.geojson](/assets/docs/about_data/files/global_exports/projects_centroid.geojson)
+
+### Export: project_stats_by_types.csv
+The newly added export contains aggregated stats for all MapSwipe projects, grouped by the 6 project types, instantly revealing each type's project count, total area covered, every swipe submitted, and average volunteers per project.
+
+#### File
+- `project_stats_by_types.csv`, e.g. [project_stats_by_types.csv](/assets/docs/about_data/files/global_exports/project_stats_by_types.csv)
 
 | Name                                | Type    | Description                                                                                                                                                                                        |
 | ----------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,14 +107,14 @@ The newly added export contains aggregated stats for all MapSwipe projects, grou
 ## Project Specific Exports
 For project specific exports, we have taken the example of the following project:
 
-> *Find Features - Public Health - Maluku, Democratic Republic of Congo (1) American Red Cross (-M56eeMCZ5VeOHjJN4Bx)*
+> *Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT — `id` `2962`, `firebaseId` `01KMMX0C9MG396SCV8W8CZ8RY3`*
 
 ### Aggregated Results
 This gives you the unfiltered MapSwipe results. This is most suited if you want to apply some custom data processing with the MapSwipe data, e.g. select only specific tasks for machine learning. If you want to use MapSwipe data in the Tasking Manager you might look for the data described below.
 
 #### Files
-- `aggregated_results_{project_id}.csv`, e.g. [agg\_results\_-M56eeMCZ5VeOHjJN4Bx.csv](/assets/docs/about_data/files/agg_results_-M56eeMCZ5VeOHjJN4Bx.csv.gz)
-- `aggregated_results_{project_id}.geojson`, e.g. [agg\_results\_-M56eeMCZ5VeOHjJN4Bx.geojson](/assets/docs/about_data/files/agg_results_-M56eeMCZ5VeOHjJN4Bx_geom.geojson.gz)
+- `agg_results_by_task_{project_id}.csv`, e.g. [agg_results_by_task_2962.csv](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962.csv)
+- `agg_results_by_task_{project_id}_geom.geojson`, e.g. [agg_results_by_task_2962_geom.geojson](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962_geom.geojson) (feature geometry is a `MultiPolygon`)
 
 | Name        | Type     | Description                                                                                                                                                                                                                                                    |
 |-------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -127,7 +139,7 @@ This gives you filtered MapSwipe data ready to be imported to the HOT Tasking Ma
 Currently, the geometries in this dataset consist of maximum 15 MapSwipe Tasks, where at least 35% of all users indicated the presence of a building by classifying as "yes" or "maybe".
 
 #### File
-- `hot_tm_{project_id}.geojson`, e.g. [hot\_tm\_-M56eeMCZ5VeOHjJN4Bx.geojson](/assets/docs/about_data/files/hot_tm_-M56eeMCZ5VeOHjJN4Bx.geojson)
+- `hot_tm_{project_id}.geojson`, e.g. [hot_tm_2962.geojson](/assets/docs/about_data/files/project_exports/hot_tm_2962.geojson)
 
 
 | Name     | Type     | Description                                                                                                                                                                |
@@ -139,7 +151,7 @@ Currently, the geometries in this dataset consist of maximum 15 MapSwipe Tasks, 
 This gives you data on the users which contributed to a project.
 
 #### File
-- `users_{project_id}.csv`, e.g. [users.csv](/assets/docs/about_data/files/users_-M56eeMCZ5VeOHjJN4Bx.csv.gz)
+- `users_{project_id}.csv`, e.g. [users_2962.csv](/assets/docs/about_data/files/project_exports/users_2962.csv)
 
 | Name                      | Type    | Description                                                                                                                                                      |
 |---------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -154,7 +166,7 @@ This gives you data on the users which contributed to a project.
 This provides data on groups, their tasks, and progress for a specific project.
 
 #### File
-- `groups_{project_id}.csv`, e.g. [groups.csv](/assets/docs/about_data/files/groups_-M56eeMCZ5VeOHjJN4Bx.csv.gz)
+- `groups_{project_id}.csv`, e.g. [groups_2962.csv](/assets/docs/about_data/files/project_exports/groups_2962.csv)
 
 | Name                     | Type    | Description                                                               |
 | ------------------------ | ------- | ------------------------------------------------------------------------- |
@@ -172,7 +184,7 @@ This provides data on groups, their tasks, and progress for a specific project.
 This tracks daily results, progress, and user contributions for a specific project.
 
 #### File
-- `history_{project_id}.csv`, e.g. [history.csv](/assets/docs/about_data/files/history_-M56eeMCZ5VeOHjJN4Bx.csv)
+- `history_{project_id}.csv`, e.g. [history_2962.csv](/assets/docs/about_data/files/project_exports/history_2962.csv)
 
 | Name                     | Type    | Description                                                               |
 | ------------------------ | ------- | ------------------------------------------------------------------------- |
@@ -190,7 +202,7 @@ This tracks daily results, progress, and user contributions for a specific proje
 This details individual task contributions, timings, and results by users in groups for a specific project.
 
 #### File
-- `results_{project_id}.csv`, e.g. [results.csv](/assets/docs/about_data/files/results_-M56eeMCZ5VeOHjJN4Bx.csv.gz)
+- `results_{project_id}.csv`, e.g. [results_2962.csv](/assets/docs/about_data/files/project_exports/results_2962.csv)
 
 | Name       | Type    | Description                                                                  |
 | ---------- | ------- | ---------------------------------------------------------------------------- |
@@ -208,8 +220,7 @@ This details individual task contributions, timings, and results by users in gro
 This lists tasks, their identifiers, groups, and geometric polygons for a specific project.
 
 #### File
-- `tasks_{project_id}.csv`, e.g. [tasks.csv](/assets/docs/about_data/files/tasks_-M56eeMCZ5VeOHjJN4Bx.csv.gz)
-
+- `tasks_{project_id}.csv`, e.g. [tasks_2962.csv](/assets/docs/about_data/files/project_exports/tasks_2962.csv)
 | Name       | Type   | Description                                                                                                           |
 | ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | project_id | string | Unique identifier for the project to which the task belongs.                                                          |
@@ -221,4 +232,4 @@ This lists tasks, their identifiers, groups, and geometric polygons for a specif
 This provides GeoJSON polygons representing areas marked as 'yes' or 'maybe' in the project.
 
 #### File
-- `yes_maybe_{project_id}.geojson`, e.g. [yes_maybe.geojson](/assets/docs/about_data/files/yes_maybe_-M56eeMCZ5VeOHjJN4Bx.geojson)
+- `yes_maybe_{project_id}.geojson`, e.g. [yes_maybe_2962.geojson](/assets/docs/about_data/files/project_exports/yes_maybe_2962.geojson)
