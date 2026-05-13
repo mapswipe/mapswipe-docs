@@ -21,7 +21,7 @@ A read-only script that downloads every per-project data export listed in the [A
 2. Posts a `ProjectExports` query to `https://backend.mapswipe.org/graphql/` filtered server-side by `id` (the project's GraphQL ID).
 3. Iterates over every `export*` field on the returned project, downloads the file at `file.url`, and gunzips it when the filename ends in `.gz` (or the payload starts with the gzip magic bytes).
 4. With `--sample N`, keeps only the first N rows of each CSV (after the header) or the first N features of each GeoJSON `FeatureCollection`. Without `--sample`, files are written through verbatim.
-5. Writes everything under `assets/docs/about_data/files/<projectId>/`.
+5. Writes every file directly into the `--out` directory. The script does not append the project id — pass a project-specific path if you want one project per directory.
 
 ## Why `id` and not `firebaseId`
 
@@ -35,17 +35,17 @@ The backend schema's `ProjectFilter` exposes `id`, `oldId`, and a handful of non
 ## Usage
 
 ```bash
-python run.py <projectId>
+uv run run.py <projectId>
 ```
 
-By default this writes to `assets/docs/about_data/files/<projectId>/` relative to the repo root.
+By default this writes to `assets/docs/about_data/files/` relative to the repo root. The script does not auto-create a per-project subdirectory — pass `--out` with a project-specific path if you want isolation.
 
 ### Options
 
 | Flag | Default | Meaning |
 | ---- | ------- | ------- |
 | `<projectId>` *(positional)* | required | The value of `ProjectType.id` (the project's GraphQL ID, used as the filter). |
-| `--out PATH` | `assets/docs/about_data/files/` (relative to the repo root) | Base output directory. The script writes into `<PATH>/<projectId>/`. |
+| `--out PATH` | `assets/docs/about_data/files/` (relative to the repo root) | Output directory. Files are written directly here; no project subdirectory is appended. |
 | `--sample N` | unset (full download) | Keep only the first N records per CSV / GeoJSON file. |
 
 ### Examples
@@ -53,36 +53,36 @@ By default this writes to `assets/docs/about_data/files/<projectId>/` relative t
 Download the full set of exports for a project:
 
 ```bash
-python run.py 3082
+uv run run.py 2962 --out assets/docs/about_data/files/project_exports
 ```
 
 Sample 10 rows / features per file (useful for generating illustrative samples for the docs):
 
 ```bash
-python run.py 3082 --sample 10
+uv run run.py 2962 --sample 10 --out assets/docs/about_data/files/project_exports
 ```
 
 Write somewhere outside the repo:
 
 ```bash
-python run.py 3082 --out /tmp/mapswipe-exports
+uv run run.py 2962 --out /tmp/mapswipe-exports
 ```
 
 ## Output layout
 
-For project `3082`, output looks like:
+The per-project files all include the project id in their name, so multiple projects can share the same `--out` directory. Given `--out assets/docs/about_data/files/project_exports` for project `2962`:
 
 ```
-assets/docs/about_data/files/3082/
-├── agg_results_by_task_3082.csv
-├── agg_results_by_task_3082_geom.geojson
-├── groups_3082.csv
-├── history_3082.csv
-├── hot_tm_3082.geojson
-├── results_3082.csv
-├── tasks_3082.csv
-├── users_3082.csv
-└── yes_maybe_3082.geojson
+assets/docs/about_data/files/project_exports/
+├── agg_results_by_task_2962.csv
+├── agg_results_by_task_2962_geom.geojson
+├── groups_2962.csv
+├── history_2962.csv
+├── hot_tm_2962.geojson
+├── results_2962.csv
+├── tasks_2962.csv
+├── users_2962.csv
+└── yes_maybe_2962.geojson
 ```
 
 Filenames come from `file.name` returned by the API; only the basename is used (any path segments in the URL are stripped).

@@ -12,4 +12,5 @@ Worked examples and reference scripts for interacting with MapSwipe.
 > **Note:** Ongoing updates to MapSwipe may render these examples out-of-date. They are intended as a starting point and assume read-only access where applicable.
 
 - [Fetch Project Data](/examples/fetch-project-data/) — read-only download of a project's public data exports.
+- [Fetch Global Data](/examples/fetch-global-data/) — read-only download of the four MapSwipe-wide global exports.
 - [Create a Project](/examples/create-project/) — authenticated example that logs in as a manager and creates a draft project end-to-end.

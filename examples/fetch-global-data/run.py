@@ -5,7 +5,6 @@
 import argparse
 import gzip
 import json
-import re
 import sys
 import urllib.request
 from http.cookiejar import CookieJar
@@ -14,42 +13,16 @@ from pathlib import Path
 BASE_URL = "https://backend.mapswipe.org"
 CSRFTOKEN_KEY = "MAPSWIPE-PROD-CSRFTOKEN"
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_OUT = REPO_ROOT / "assets" / "docs" / "about_data" / "files"
+DEFAULT_OUT = REPO_ROOT / "assets" / "docs" / "about_data" / "files" / "global"
 TIMEOUT = 60
 
-TOKEN_RE = re.compile(rb"token=[^,&\"\s]+")
-
-EXPORT_FIELDS = (
-    "exportAggregatedResults",
-    "exportAggregatedResultsWithGeometry",
-    "exportAreaOfInterest",
-    "exportGroups",
-    "exportHistory",
-    "exportResults",
-    "exportTasks",
-    "exportUsers",
-    "exportHotTaskingManagerGeometries",
-    "exportModerateToHighAgreementYesMaybeGeometries",
-)
-
 QUERY = """
-    query ProjectExports($id: ID!) {
-      publicProjects(filters: { id: { exact: $id } }) {
-        results {
-          id
-          firebaseId
-          oldId
-          exportAggregatedResults                          { file { url name } }
-          exportAggregatedResultsWithGeometry              { file { url name } }
-          exportAreaOfInterest                             { file { url name } }
-          exportGroups                                     { file { url name } }
-          exportHistory                                    { file { url name } }
-          exportResults                                    { file { url name } }
-          exportTasks                                      { file { url name } }
-          exportUsers                                      { file { url name } }
-          exportHotTaskingManagerGeometries                { file { url name } }
-          exportModerateToHighAgreementYesMaybeGeometries  { file { url name } }
-        }
+    query GlobalExports {
+      globalExportAssets {
+        type
+        lastUpdatedAt
+        fileSize
+        file { url name }
       }
     }
 """
@@ -70,16 +43,12 @@ def get_csrf_token(opener: urllib.request.OpenerDirector, jar: CookieJar) -> str
     raise RuntimeError(f"CSRF cookie {CSRFTOKEN_KEY!r} not set by health-check")
 
 
-def fetch_project(
-    opener: urllib.request.OpenerDirector,
-    project_id: str,
-    csrf_token: str,
-) -> dict:
+def fetch_global_exports(opener: urllib.request.OpenerDirector, csrf_token: str) -> list[dict]:
     payload = json.dumps(
         {
-            "operationName": "ProjectExports",
+            "operationName": "GlobalExports",
             "query": QUERY,
-            "variables": {"id": project_id},
+            "variables": {},
         }
     ).encode("utf-8")
     req = urllib.request.Request(
@@ -96,10 +65,10 @@ def fetch_project(
         body = json.loads(resp.read())
     if "errors" in body:
         raise RuntimeError(f"GraphQL errors: {body['errors']}")
-    results = body.get("data", {}).get("publicProjects", {}).get("results", []) or []
-    if not results:
-        raise RuntimeError(f"No project matching {project_id!r}")
-    return results[0]
+    assets = body.get("data", {}).get("globalExportAssets") or []
+    if not assets:
+        raise RuntimeError("globalExportAssets returned no assets")
+    return assets
 
 
 def maybe_decompress(payload: bytes, filename: str) -> tuple[bytes, str]:
@@ -144,25 +113,21 @@ def process(
             payload = sample_csv(payload, sample)
         elif lower.endswith((".geojson", ".json")):
             payload = sample_geojson(payload, sample)
-    payload = TOKEN_RE.sub(b"token=REDACTED", payload)
     out_path = out_dir / Path(out_name).name
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_bytes(payload)
     return out_path
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Fetch MapSwipe per-project exports via the GraphQL backend.",
-    )
-    parser.add_argument(
-        "project_id",
-        help="Project GraphQL id (the value of ProjectType.id, used to filter publicProjects).",
+        description="Fetch MapSwipe global data exports via the GraphQL backend.",
     )
     parser.add_argument(
         "--out",
         type=Path,
         default=DEFAULT_OUT,
-        help=f"Base output directory (default: {DEFAULT_OUT})",
+        help=f"Output directory (default: {DEFAULT_OUT})",
     )
     parser.add_argument(
         "--sample",
@@ -180,24 +145,25 @@ def main() -> int:
     print("Acquiring CSRF token...", file=sys.stderr)
     csrf_token = get_csrf_token(opener, jar)
 
-    print(f"Looking up exports for {args.project_id}...", file=sys.stderr)
-    project = fetch_project(opener, args.project_id, csrf_token)
+    print("Fetching global exports...", file=sys.stderr)
+    assets = fetch_global_exports(opener, csrf_token)
 
     downloads: list[tuple[str, str]] = []
-    for field in EXPORT_FIELDS:
-        export = project.get(field)
-        if not export:
-            continue
-        file_info = export.get("file") or {}
+    for asset in assets:
+        file_info = asset.get("file") or {}
         url, name = file_info.get("url"), file_info.get("name")
         if url and name:
             downloads.append((url, name))
 
     if not downloads:
-        print("Project has no published export files.", file=sys.stderr)
+        print("No downloadable files in response.", file=sys.stderr)
         return 1
 
-    mode = f"sampling up to {args.sample} record(s) per file" if args.sample is not None else "downloading in full"
+    mode = (
+        f"sampling up to {args.sample} record(s) per file"
+        if args.sample is not None
+        else "downloading in full"
+    )
     print(f"{len(downloads)} export(s) found, {mode}.", file=sys.stderr)
     failures = 0
     for url, name in downloads:
