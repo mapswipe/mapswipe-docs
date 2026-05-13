@@ -1,11 +1,11 @@
 ---
-title: MapSwipe Backend API
+title: Create a Project
 parent: Examples and Scripts
 nav_order: 1
-permalink: /examples/mapswipe-backend-api/
+permalink: /examples/create-project/
 ---
 
-# MapSwipe Backend API Example
+# Create a Project — Authenticated Backend Example
 
 ## Background
 
@@ -26,7 +26,7 @@ This script is provided as an example for interacting with the MapSwipe backend.
 > [!IMPORTANT]
 > You do not need manager account credentials for read-only access. \
 > After setting `ENABLE_AUTHENTICATION` to `false`, you can run the read-only part of the script. \
-> https://github.com/mapswipe/mapswipe-docs/blob/28fb662442eb05332b7fc56dc104d3eca114e9e3/examples/mapswipe-backend-api/run.py#L444-L460
+> https://github.com/mapswipe/mapswipe-docs/blob/main/examples/create-project/run.py#L444-L460
 
 - Create `.env` file.
 - Define the following variables:
@@ -49,7 +49,7 @@ This script is provided as an example for interacting with the MapSwipe backend.
 
 Your final `.env` for alpha instance should look like this:
 
-```dotenv
+```bash
 MANAGER_URL=https://manager-2.mapswipe.dev.togglecorp.com
 BACKEND_URL=https://backend-2.mapswipe.dev.togglecorp.com
 CSRFTOKEN_KEY=MAPSWIPE-ALPHA-2-CSRFTOKEN
@@ -65,7 +65,7 @@ FB_PASSWORD=my-very-good-password
 
 Your final `.env` for staging instance should look like this:
 
-```dotenv
+```bash
 MANAGER_URL=https://managers-stage.mapswipe.org
 BACKEND_URL=https://backend-stage.mapswipe.org
 CSRFTOKEN_KEY=MAPSWIPE-STAGE-CSRFTOKEN
@@ -85,7 +85,7 @@ FB_PASSWORD=my-very-good-password
 
 Your final `.env` for production instance should look like this:
 
-```dotenv
+```bash
 MANAGER_URL=https://managers.mapswipe.org
 BACKEND_URL=https://backend.mapswipe.org
 CSRFTOKEN_KEY=MAPSWIPE-PROD-CSRFTOKEN
