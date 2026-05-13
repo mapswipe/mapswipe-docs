@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{%- assign anchored = content | inject_anchors -%}
+{%- if page.toc and content contains '<h2' and anchored contains '</h1>' -%}
+  {%- assign parts = anchored | split: '</h1>' -%}
+  {{ parts[0] }}</h1>
+  <nav class="page-toc" aria-label="Table of contents">
+    <p class="page-toc-title">Table of contents</p>
+    {{ content | toc_only }}
+  </nav>
+  {{ parts | slice: 1, 999 | join: '</h1>' }}
+{%- elsif page.toc and content contains '<h2' -%}
+  <nav class="page-toc" aria-label="Table of contents">
+    <p class="page-toc-title">Table of contents</p>
+    {{ content | toc_only }}
+  </nav>
+  {{ anchored }}
+{%- else -%}
+  {{ anchored }}
+{%- endif -%}

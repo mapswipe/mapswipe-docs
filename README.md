@@ -27,3 +27,17 @@ bundle install
 ```bash
 bundle exec jekyll serve --livereload
 ```
+
+## Changing the syntax highlighting theme
+
+Fenced code blocks are colored by [Rouge](https://github.com/rouge-ruby/rouge), wired into CommonMark via `syntax_highlighter: rouge` in `_config.yml`. The active theme is generated to `assets/css/syntax.css`.
+
+To switch themes, run the following commands:
+
+```bash
+# List every theme Rouge ships with
+bundle exec rougify help style
+
+# Regenerate the stylesheet
+bundle exec rougify style gruvbox.dark > assets/css/syntax.css
+```
