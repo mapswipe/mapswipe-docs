@@ -6,14 +6,14 @@ permalink: /docs/overview/
 
 # MapSwipe Overview
 
+This page walks through the typical MapSwipe workflow, from a project manager setting up a project through to volunteers contributing results and the data being exported. For how the underlying components fit together, see [System Architecture](/docs/system_architecture/).
+
 ## A typical MapSwipe workflow
 
-1. Project managers upload information about their projects (e.g. area of interest, objects to look for) to backend, which will sync information to Firebase in realtime database, using the **manager dashboard**.
-2. A tutorial must be attached to the projects using existing tutorials or a new one in the final phase of project creation before the publishing it.
-3. After the project is published from the **manager dashboard**, relevant groups and tasks are created in the backend and synced with Firebase
-4. The users of the MapSwipe app contribute to the projects and submit their results via app which will be stored in backend as well as Firebase realtime database. The **firebase rules** ensure, that app users can only change pre-defined parts of the firebase realtime database.
-5. Once new results are submitted, the **backend** and **firebase functions** generate real-time statistics and update the progress of groups, compute project level statistics and user statistics in the backend and firebase realtime database.
-6. All results are synchronized with **backend** and **firebase** on defined basis (e.g. every 10 minutes). The backend database holds all MapSwipe results for long term storage. Once results are synced in the backend database, they will be deleted in Firebase realtime database by the workers.
-7. Based on the data in the backend, the **backend** generates aggregated data and statistics (e.g. as CSV files). The data is served by the backend's GraphQL endpoint (the older nginx-served REST API is no longer used).
-
-For the architectural picture behind this workflow — old vs. new architecture and the individual components — see [System Architecture](/docs/system_architecture/).
+1. Project managers use the **Manager Dashboard** to upload project information (e.g. area of interest, objects to look for) to the backend, which syncs it to the Firebase Realtime Database.
+2. In the final phase of project creation, a tutorial must be attached before the project can be published — either an existing shared tutorial or one specialised for the project.
+3. Once the project is published from the **Manager Dashboard**, the backend creates the relevant groups and tasks and syncs them to Firebase.
+4. Users of the MapSwipe app contribute to projects and submit their results through the app; these are stored in both the Firebase Realtime Database. **Firebase rules** ensure that app users can only change pre-defined parts of the Firebase Realtime Database.
+5. As new results arrive, **Firebase functions** and the **backend** generate real-time statistics — updating group progress and computing project and user statistics.
+6. Results are synchronised between the **backend** and **Firebase** on a defined schedule (e.g. every 10 minutes). The backend database holds all MapSwipe results for long-term storage; once results are synced and then deletes them from the Firebase Realtime Database.
+7. The **backend** then generates aggregated data and statistics from this stored data and serves them via its GraphQL endpoint.

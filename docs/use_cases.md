@@ -6,9 +6,6 @@ permalink: /docs/use_cases/
 
 # Use Cases
 
-> [!NOTE]
-> This page is based on the first version of MapSwipe and contains some outdated information. It's still a useful starting point for thinking about whether a project is a good fit for MapSwipe.
-
 ## How to identify "good" mapping tasks for MapSwipe
 
 MapSwipe projects can cover large areas in comparison to other mapping approaches, e.g. using the HOT Tasking Manager. Nevertheless, the level of detail of the resulting information you can expect from the resulting data will be lower than using the data from OpenStreetMap.

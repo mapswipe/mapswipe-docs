@@ -6,7 +6,7 @@ permalink: /docs/system_architecture/
 
 # System Architecture
 
-This page describes how the MapSwipe system is put together: the old vs. new architecture, and the individual components that make up the new architecture today. For the typical end-to-end workflow (project request → publish → contribute → export), see [Overview](/docs/overview/).
+This page describes how the MapSwipe system is put together: the old vs. new architecture, and the individual components that make up the new architecture today.
 
 ## Architecture overview
 
@@ -37,6 +37,9 @@ The primary reason for keeping Firebase as the primary database was auto-scaling
 
 The major difference in the new architecture is that **Postgres is the primary database**. Only the MapSwipe mobile and web apps interface with Firebase directly. The system stays scalable and reliable while significantly reducing the usage of the Firebase Realtime Database. See the [Components](#components) section below for an inventory of the pieces.
 
+> [!NOTE]
+> **Firebase Endpoints** shown in the new architecture diagram is planned for a future iteration and has not yet been implemented. Today, the mobile and web apps still read from and write to the Firebase Realtime Database directly.
+
 ## Components
 
 ### Public Website
@@ -44,7 +47,7 @@ The major difference in the new architecture is that **Postgres is the primary d
 - **Source:** [`mapswipe/website`](https://github.com/mapswipe/website)
 - **Deployed at:** <https://mapswipe.org/>
 
-The public marketing and information site for MapSwipe — what MapSwipe is, recent projects, the organisations behind it, and links to the apps and dashboards.
+The public-facing website for MapSwipe — an introduction to the project, recent mapping work, the organisations behind it, and links to the apps and dashboards.
 
 ### Mobile App
 
@@ -75,16 +78,14 @@ A React-based static site showcasing aggregated MapSwipe contribution stats, plu
 
 The central **Django server** backed by Postgres. A single service is responsible for:
 
-- The **GraphQL API** consumed by the [Manager Dashboard](#manager-dashboard) and the [Community Dashboard](#community-dashboard). (REST endpoints from earlier iterations are no longer used.)
+- The **GraphQL API** consumed by the [Manager Dashboard](#manager-dashboard) and the [Community Dashboard](#community-dashboard).
 - **Data synchronisation** between Postgres and Firebase Realtime Database — including the background workers that transfer in-flight results out of Firebase and into Postgres for long-term storage.
 - The **data-export generation** that produces the files documented under [About the Data](/docs/about_data/).
-
-The state machines that drive the [project lifecycle](/docs/for_project_managers/projects/#status-flow) and the [tutorial lifecycle](/docs/for_project_managers/tutorials/#status-flow) are also defined here (in `apps/project/serializers.py` and `apps/tutorial/serializers.py`).
 
 ### Firebase Cloud Functions
 
 - **Source:** [`mapswipe/mapswipe-firebase`](https://github.com/mapswipe/mapswipe-firebase)
 
-Cloud Functions that react to Firebase Realtime Database events — incrementing per-user contribution counters when results arrive, propagating user-group membership changes, queuing PSQL-sync flags so the backend knows what changed, and serving the OSM OAuth handshake.
+Cloud Functions that react to Firebase Realtime Database events — incrementing per-user contribution counters when results arrive, propagating user-group membership changes, queuing PSQL-sync flags so the backend knows what changed, and serving the OSM OAuth login.
 
-The functions co-exist with the runtime **Firebase Realtime Database**, which holds active project / group / task data and in-flight result submissions until the backend workers transfer them to Postgres.
+The functions co-exist with the runtime **Firebase Realtime Database**, which holds active project / group / task data and in-flight result submissions until the backend workers transfer them to Postgres database.
