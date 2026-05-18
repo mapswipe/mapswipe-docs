@@ -16,7 +16,7 @@ View Streets projects have `projectType = 7`.
 ## Project
 The View Streets project type takes an AOI geometry as an input and returns corresponding Mapillary images to MapSwipe.
 
-In addition to the common project fields documented in the [data model](/project_types/), View Streets projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), View Streets projects carry the following project-type-specific fields:
 
 | Parameter          | Type            | Description                                                                                                                        |
 |--------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------|
@@ -24,7 +24,7 @@ In addition to the common project fields documented in the [data model](/project
 | **numberOfGroups** | int             | Total number of groups generated for the project.                                                                                  |
 
 ## Group
-View Streets groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
+View Streets groups have no project-type-specific fields beyond the [common group fields](../project_types.md#groups). Each group is identified by:
 
 | Parameter   | Type   | Description       |
 |-------------|--------|-------------------|
@@ -39,7 +39,7 @@ The task payload is a Base64-encoded, GZIP-compressed string; clients decode and
 | **groupId** | string | ID of the group the task belongs to.       |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project, since answers are given via custom options set by the project creator.
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project, since answers are given via custom options set by the project creator.
 
 When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
 

@@ -55,7 +55,7 @@ At a glance, the end-to-end flow looks like:
     - You can edit it as needed; however, the project type is locked at this stage.
 - Fields under the **Additional** section come with default values that can be edited.
     - Upload a project cover image, or the default cover for the project type will be used.
-- Fill in the **Project type specific details** section. The form changes per project type — see the [Project Types](/project_types/) docs for each type's exact fields.
+- Fill in the **Project type specific details** section. The form changes per project type — see the [Project Types](../project_types.md) docs for each type's exact fields.
 - Save the project.
 - Once saved, submit the project for processing to move to the next stage.
 
@@ -72,7 +72,7 @@ At a glance, the end-to-end flow looks like:
 - The **General**, **Additional**, and **Project type specific details** sections are now populated.
     - You can update the general information and the project cover image.
 - Attach a tutorial of the matching project type from the list of options.
-    - If no suitable tutorial exists, or the project needs a custom tutorial, [create the tutorial first](/docs/for_project_managers/tutorials/#creating-a-tutorial) and come back to continue project creation.
+    - If no suitable tutorial exists, or the project needs a custom tutorial, [create the tutorial first](./tutorials.md#creating-a-tutorial) and come back to continue project creation.
 - Save the updated project, then publish it.
 
 ### Publishing

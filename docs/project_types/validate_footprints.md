@@ -19,7 +19,7 @@ Validate Footprints can be supplied with geometries in three separate ways.
 2. by specifying an url to the data (e.g. an [ohsomeAPI](https://docs.ohsome.org/ohsome-api/v1/) call)
 3. by uploading an aoi and an object [filter](https://docs.ohsome.org/ohsome-api/v1/filter.html)
 
-In addition to the common project fields documented in the [data model](/project_types/), Validate Footprints projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), Validate Footprints projects carry the following project-type-specific fields:
 
 | Parameter         | Type              | Description                                                                                                                                                                                                  |
 |-------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -30,7 +30,7 @@ In addition to the common project fields documented in the [data model](/project
 | **customOptions** | list (optional)   | Optional custom answer options shown to the contributor (each with a value, title, description, icon, iconColor, and optional sub-options) — overrides the default Yes/No/Not sure choices.                  |
 
 ## Group
-Validate Footprints groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
+Validate Footprints groups have no project-type-specific fields beyond the [common group fields](../project_types.md#groups). Each group is identified by:
 
 | Parameter   | Type   | Description       |
 |-------------|--------|-------------------|
@@ -44,7 +44,7 @@ Validate Footprints groups have no project-type-specific fields beyond the [comm
 | **geojson** | object | GeoJSON polygon (typically a building or other feature outline) for the user to validate against the imagery. |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value`.
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value`.
 
 When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
 

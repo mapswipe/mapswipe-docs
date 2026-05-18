@@ -6,7 +6,7 @@ permalink: /docs/overview/
 
 # MapSwipe Overview
 
-This page walks through the typical MapSwipe workflow, from a project manager setting up a project through to volunteers contributing results and the data being exported. For how the underlying components fit together, see [System Architecture](/docs/system_architecture/).
+This page walks through the typical MapSwipe workflow, from a project manager setting up a project through to volunteers contributing results and the data being exported. For how the underlying components fit together, see [System Architecture](system_architecture.md).
 
 ## A typical MapSwipe workflow
 

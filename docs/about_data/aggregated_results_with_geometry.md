@@ -6,11 +6,11 @@ permalink: /docs/about_data/aggregated_results_with_geometry/
 ---
 
 # Aggregated Results (with Geometry)
-Same task-level aggregation as [Aggregated Results](/docs/about_data/aggregated_results/), but delivered as a GeoJSON `FeatureCollection` — the task polygon lives on each feature's `geometry` instead of being a WKT column.
+Same task-level aggregation as [Aggregated Results](aggregated_results.md), but delivered as a GeoJSON `FeatureCollection` — the task polygon lives on each feature's `geometry` instead of being a WKT column.
 
 ## Schema
 
-One feature per task. Property names match [Aggregated Results](/docs/about_data/aggregated_results/) minus `geom` (the geometry is on the feature itself). Each feature's `geometry` is a `MultiPolygon` (EPSG:4326).
+One feature per task. Property names match [Aggregated Results](aggregated_results.md) minus `geom` (the geometry is on the feature itself). Each feature's `geometry` is a `MultiPolygon` (EPSG:4326).
 
 ## Sample download
 

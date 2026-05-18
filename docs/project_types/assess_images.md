@@ -21,14 +21,14 @@ To build a COCO file from a folder of images you already host, see the helper ex
 ## Project
 Assess Images projects can be supplied with a COCO file.
 
-In addition to the common project fields documented in the [data model](/project_types/), Assess Images projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), Assess Images projects carry the following project-type-specific fields:
 
 | Parameter         | Type            | Description                                                                                                                                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **customOptions** | list (optional) | Custom answer options shown to the contributor (each with a value, title, description, icon, iconColor, and optional sub-options). Defaults are Yes/No when not supplied. |
 
 ## Group
-Each group contains a set of image tasks generated from the supplied COCO file. Assess Images groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
+Each group contains a set of image tasks generated from the supplied COCO file. Assess Images groups have no project-type-specific fields beyond the [common group fields](../project_types.md#groups). Each group is identified by:
 
 | Parameter   | Type   | Description       |
 |-------------|--------|-------------------|
@@ -49,7 +49,7 @@ The task structure of the Assess Images project type varies from the rest — ea
 | **segmentation** | `list[list[float]]` (optional) | Optional polygon segmentation (list of `[x, y, …]` rings) from the COCO annotation.  |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project.
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project.
 
 When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
 

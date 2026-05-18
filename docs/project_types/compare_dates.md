@@ -16,7 +16,7 @@ Compare Dates projects have `projectType = 3`.
 ## Project
 The structure and creation steps follow the similar pattern of the Find Features project type. Projects can also be created via a HOT Tasking Manager Project ID.
 
-In addition to the common project fields documented in the [data model](/project_types/), Compare Dates projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), Compare Dates projects carry the following project-type-specific fields:
 
 | Parameter       | Type   | Description                                                                                                                                |
 |-----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -45,7 +45,7 @@ Compare Dates groups carry tile-map-service bounding-box tile coordinates on top
 | **urlB**     | string (optional) | Image for the tile after timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                         |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
 
 | Value | Meaning     |
 |-------|-------------|

@@ -6,7 +6,7 @@ permalink: /docs/about_data/aggregated_results/
 ---
 
 # Aggregated Results
-This gives you the unfiltered MapSwipe results aggregated on the task level. This is most suited if you want to apply some custom data processing with the MapSwipe data, e.g. select only specific tasks. If you want geometries on each task instead of a `geom` column, see [Aggregated Results (with Geometry)](/docs/about_data/aggregated_results_with_geometry/).
+This gives you the unfiltered MapSwipe results aggregated on the task level. This is most suited if you want to apply some custom data processing with the MapSwipe data, e.g. select only specific tasks. If you want geometries on each task instead of a `geom` column, see [Aggregated Results (with Geometry)](aggregated_results_with_geometry.md).
 
 ## Schema
 

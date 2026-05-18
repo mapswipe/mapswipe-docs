@@ -9,14 +9,14 @@ permalink: /examples/generate-coco-from-dropbox/
 
 ## Background
 
-[Assess Images](/project_types/assess_images/) projects are created from a COCO-format JSON file describing the images to be mapped. This page provides a Python script that produces a minimal COCO file (`{ "images": [...] }`) from a folder of images hosted on Dropbox, so they can be referenced by public URL. The script also uploads the resulting JSON back to the same Dropbox folder.
+[Assess Images](../../docs/project_types/assess_images.md) projects are created from a COCO-format JSON file describing the images to be mapped. This page provides a Python script that produces a minimal COCO file (`{ "images": [...] }`) from a folder of images hosted on Dropbox, so they can be referenced by public URL. The script also uploads the resulting JSON back to the same Dropbox folder.
 
 > [!CAUTION]
 > Ongoing updates to MapSwipe and Dropbox may render this script **out-of-date**.
 
 Utility script: [`generate_coco_from_dropbox.py`](generate_coco_from_dropbox.py)
 
-> For the Google Drive equivalent see [Generate COCO File from Google Drive](/examples/generate-coco-from-drive/).
+> For the Google Drive equivalent see [Generate COCO File from Google Drive](../generate-coco-from-drive/README.md).
 
 ## Prerequisites
 

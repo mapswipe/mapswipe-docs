@@ -12,6 +12,14 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-toc
+  - jekyll-relative-links
+
+# Rewrite Markdown links to *.md files into their rendered permalinks at build
+# time. Lets us author plain relative .md links (which lychee can verify on
+# disk) instead of hand-maintaining permalink URLs.
+relative_links:
+  enabled: true
+  collections: false
 
 # Markdown processor (jekyll-commonmark-ghpages)
 markdown: CommonMarkGhPages

@@ -15,12 +15,12 @@ The MapSwipe crowdsourcing workflow is designed following an approach already pr
 
 The MapSwipe backend now supports 6 **project types**. Each project type formulates a specific kind of mapping challenge — follow the links for a description, screenshot, and data model details for each one.
 
-- [Find Features](/docs/project_types/find_features)
-- [Validate Footprints](/docs/project_types/validate_footprints)
-- [Compare Dates](/docs/project_types/compare_dates)
-- [Assess Images](/docs/project_types/assess_images)
-- [Check Completeness](/docs/project_types/check_completeness)
-- [View Streets](/docs/project_types/view_streets)
+- [Find Features](project_types/find_features.md)
+- [Validate Footprints](project_types/validate_footprints.md)
+- [Compare Dates](project_types/compare_dates.md)
+- [Assess Images](project_types/assess_images.md)
+- [Check Completeness](project_types/check_completeness.md)
+- [View Streets](project_types/view_streets.md)
 
 
 ## Data Model

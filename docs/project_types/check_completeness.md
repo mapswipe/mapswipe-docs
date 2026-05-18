@@ -18,7 +18,7 @@ Check Completeness projects have `projectType = 4`.
 ## Project
 The structure and creation steps follow the similar pattern of the Find Features project type.
 
-In addition to the common project fields documented in the [data model](/project_types/), Check Completeness projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), Check Completeness projects carry the following project-type-specific fields:
 
 | Parameter              | Type   | Description                                                                                                                                                |
 |------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,7 @@ Tasks are saved for tutorials, since their spatial information can be derived fr
 | **url**      | string | The tile URL points to the specific tile image described by the x, y, and z coordinates. Usually, the image has a resolution of 256 x 256 pixels. However, some providers also generate image tiles with higher resolution (e.g. 512 x 512 pixels).                                                                                                                                    |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
 
 | Value | Meaning     |
 |-------|-------------|

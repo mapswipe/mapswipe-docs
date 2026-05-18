@@ -184,7 +184,7 @@ def main():
         access_token=access_token,
     )
 
-    # Share individual file publically and get public link
+    # Share individual file publicly and get public link
     public_images = share_file_and_get_links(
         files,
         access_token=access_token,

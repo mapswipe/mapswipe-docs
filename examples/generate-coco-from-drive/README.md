@@ -9,14 +9,14 @@ permalink: /examples/generate-coco-from-drive/
 
 ## Background
 
-[Assess Images](/project_types/assess_images/) projects are created from a COCO-format JSON file describing the images to be mapped. This page provides a Google Apps Script that produces a minimal COCO file (`{ "images": [...] }`) from a folder of images hosted on Google Drive, so they can be referenced by public URL.
+[Assess Images](../../docs/project_types/assess_images.md) projects are created from a COCO-format JSON file describing the images to be mapped. This page provides a Google Apps Script that produces a minimal COCO file (`{ "images": [...] }`) from a folder of images hosted on Google Drive, so they can be referenced by public URL.
 
 > [!CAUTION]
 > Ongoing updates to MapSwipe and Google Drive may render this script **out-of-date**.
 
 Utility script: [`generate_coco_from_drive.js`](generate_coco_from_drive.js)
 
-> For the Dropbox equivalent see [Generate COCO File from Dropbox](/examples/generate-coco-from-dropbox/).
+> For the Dropbox equivalent see [Generate COCO File from Dropbox](../generate-coco-from-dropbox/README.md).
 
 ## Prerequisites
 

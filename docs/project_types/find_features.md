@@ -16,7 +16,7 @@ Find Features projects have `projectType = 1`.
 ## Project
 To create a Find Features project, you need to add all information and upload a bounding polygon as well as fill in some information about your project.
 
-In addition to the common project fields documented in the [data model](/project_types/), Find Features projects carry the following project-type-specific fields:
+In addition to the common project fields documented in the [data model](../project_types.md), Find Features projects carry the following project-type-specific fields:
 
 | Parameter      | Type   | Description                                                                                                |
 |----------------|--------|------------------------------------------------------------------------------------------------------------|
@@ -47,7 +47,7 @@ Tasks are saved for tutorials, since their spatial information can be derived fr
 | **url**      | string | The tile URL points to the specific tile image described by the x, y, and z coordinates. Usually, the image has a resolution of 256 x 256 pixels. However, some providers also generate image tiles with higher resolution (e.g. 512 x 512 pixels).                                                                                                                                    |
 
 ## Result
-Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer encoding for Find Features is:
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer encoding for Find Features is:
 
 | Value | Meaning      |
 |-------|--------------|

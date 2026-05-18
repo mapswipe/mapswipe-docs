@@ -6,7 +6,7 @@ permalink: /docs/about_data/projects_centroid/
 ---
 
 # Projects with Centroid
-Same `FeatureCollection` and property schema as [Projects with Geometry](/docs/about_data/projects_geom/), but each feature's `geometry` is a single `Point` (the project centroid) instead of a `GeometryCollection` of polygons. Use this when you want a lightweight overview map without the full project boundaries.
+Same `FeatureCollection` and property schema as [Projects with Geometry](projects_geom.md), but each feature's `geometry` is a single `Point` (the project centroid) instead of a `GeometryCollection` of polygons. Use this when you want a lightweight overview map without the full project boundaries.
 
 ## Sample download
 
