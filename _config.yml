@@ -63,6 +63,7 @@ gh_edit_view_mode: "edit"
 
 # UI: Footer
 footer_content: 'Copyright &copy; MapSwipe. Distributed under the project license.'
+last_edit_timestamp: true
 
 # UI: Back-to-top link
 back_to_top: true
@@ -70,6 +71,11 @@ back_to_top_text: "Back to top"
 
 # UI: Copy-to-clipboard button on fenced code blocks
 enable_copy_code_button: true
+
+# UI: Mermaid diagrams in fenced ```mermaid blocks (just-the-docs theme)
+# Version picked from https://www.jsdelivr.com/package/npm/mermaid
+mermaid:
+  version: "11.4.1"
 
 # In-page Table of Contents (jekyll-toc)
 toc:
