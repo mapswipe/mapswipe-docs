@@ -1,5 +1,111 @@
-markdown: GFM
+# Site metadata
+title: MapSwipe Docs
+description: Documentation for MapSwipe platform
+url: https://docs.mapswipe.org
 repository: mapswipe/mapswipe-docs
 
+# Plugins
 plugins:
+  - jekyll-remote-theme
+  - jekyll-commonmark-ghpages
   - jekyll-gfm-admonitions
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-toc
+  - jekyll-relative-links
+
+# Rewrite Markdown links to *.md files into their rendered permalinks at build
+# time. Lets us author plain relative .md links (which lychee can verify on
+# disk) instead of hand-maintaining permalink URLs.
+relative_links:
+  enabled: true
+  collections: false
+
+# Markdown processor (jekyll-commonmark-ghpages)
+markdown: CommonMarkGhPages
+commonmark:
+  options:
+    - SMART
+    - UNSAFE
+  extensions:
+    - strikethrough
+    - autolink
+    - table
+    - tagfilter
+    - tasklist
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: text
+
+# Theme: just-the-docs (loaded via jekyll-remote-theme)
+remote_theme: just-the-docs/just-the-docs
+color_scheme: mapswipe
+
+# UI: Search
+search_enabled: true
+search:
+  heading_level: 3
+  previews: 2
+  preview_words_before: 3
+  preview_words_after: 3
+  tokenizer_separator: /[\s\-/]+/
+  rel_url: true
+  button: false
+
+# UI: Anchor links on headings
+heading_anchors: true
+
+# UI: Top-right auxiliary links
+aux_links:
+  Community: https://community.mapswipe.org
+  Website: https://mapswipe.org
+  Manager Dashboard: https://managers.mapswipe.org
+aux_links_new_tab: true
+
+# UI: "Edit this page" footer link
+gh_edit_link: true
+gh_edit_link_text: "Edit this page"
+gh_edit_repository: "https://github.com/mapswipe/mapswipe-docs"
+gh_edit_branch: "main"
+gh_edit_view_mode: "edit"
+
+# UI: Footer
+footer_content: 'Copyright &copy; MapSwipe. Distributed under the project license.'
+last_edit_timestamp: true
+
+# UI: Back-to-top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# UI: Copy-to-clipboard button on fenced code blocks
+enable_copy_code_button: true
+
+# UI: Mermaid diagrams in fenced ```mermaid blocks (just-the-docs theme)
+# Version picked from https://www.jsdelivr.com/package/npm/mermaid
+mermaid:
+  version: "11.4.1"
+
+# In-page Table of Contents (jekyll-toc)
+toc:
+  min_level: 2
+  max_level: 4
+  ordered_list: false
+  no_toc_section_class: no-toc
+
+# Page defaults (Jekyll core)
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page
+      toc: true
+
+# Build exclusions (Jekyll core)
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - pre-push.sh
+  - .pre-commit-config.yaml
+  - typos.toml
+  - .lycheeignore

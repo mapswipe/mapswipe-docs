@@ -4,7 +4,13 @@ repos:
     hooks:
       - id: lychee
         files: \.md$
-        args: ["--no-progress", "--root-dir=.", "."]
+        args:
+          - "--no-progress"
+          - "--root-dir=."
+          - "--exclude-path=_includes"
+          - "--exclude-path=_layouts"
+          - "--exclude-path=_site"
+          - "."
         pass_filenames: false
 
   - repo: https://github.com/crate-ci/typos

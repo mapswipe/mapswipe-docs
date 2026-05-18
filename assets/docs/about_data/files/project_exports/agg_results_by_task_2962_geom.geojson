@@ -1,0 +1,546 @@
+{
+  "type": "FeatureCollection",
+  "name": "tmpx_ecqmsz",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 0.0,
+        "task_id": "18-155308-149594",
+        "0_count": 6.0,
+        "1_count": 0.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 1.0,
+        "1_share": 0.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287441.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123120.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155308.0,
+        "tile_y": 149594.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2830810546875,
+                -24.6395278806334
+              ],
+              [
+                33.2844543457031,
+                -24.6395278806334
+              ],
+              [
+                33.2844543457031,
+                -24.6407761254856
+              ],
+              [
+                33.2830810546875,
+                -24.6407761254856
+              ],
+              [
+                33.2830810546875,
+                -24.6395278806334
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 1.0,
+        "task_id": "18-155308-149595",
+        "0_count": 6.0,
+        "1_count": 0.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 1.0,
+        "1_share": 0.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287442.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123122.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155308.0,
+        "tile_y": 149595.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2830810546875,
+                -24.6407761254856
+              ],
+              [
+                33.2844543457031,
+                -24.6407761254856
+              ],
+              [
+                33.2844543457031,
+                -24.642024357864
+              ],
+              [
+                33.2830810546875,
+                -24.642024357864
+              ],
+              [
+                33.2830810546875,
+                -24.6407761254856
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 2.0,
+        "task_id": "18-155308-149596",
+        "0_count": 6.0,
+        "1_count": 0.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 1.0,
+        "1_share": 0.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.003013110121233e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287443.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123300.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155308.0,
+        "tile_y": 149596.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2830810546875,
+                -24.642024357864
+              ],
+              [
+                33.2844543457031,
+                -24.642024357864
+              ],
+              [
+                33.2844543457031,
+                -24.6432725777682
+              ],
+              [
+                33.2830810546875,
+                -24.6432725777682
+              ],
+              [
+                33.2830810546875,
+                -24.642024357864
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 3.0,
+        "task_id": "18-155309-149594",
+        "0_count": 1.0,
+        "1_count": 5.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 0.16666666666666666,
+        "1_share": 0.8333333333333334,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 0.6666666666666666,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287444.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123121.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155309.0,
+        "tile_y": 149594.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2844543457031,
+                -24.6395278806334
+              ],
+              [
+                33.2858276367188,
+                -24.6395278806334
+              ],
+              [
+                33.2858276367188,
+                -24.6407761254856
+              ],
+              [
+                33.2844543457031,
+                -24.6407761254856
+              ],
+              [
+                33.2844543457031,
+                -24.6395278806334
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 4.0,
+        "task_id": "18-155309-149595",
+        "0_count": 6.0,
+        "1_count": 0.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 1.0,
+        "1_share": 0.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287445.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123123.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155309.0,
+        "tile_y": 149595.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2844543457031,
+                -24.6407761254856
+              ],
+              [
+                33.2858276367188,
+                -24.6407761254856
+              ],
+              [
+                33.2858276367188,
+                -24.642024357864
+              ],
+              [
+                33.2844543457031,
+                -24.642024357864
+              ],
+              [
+                33.2844543457031,
+                -24.6407761254856
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 5.0,
+        "task_id": "18-155309-149596",
+        "0_count": 5.0,
+        "1_count": 0.0,
+        "2_count": 1.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 0.8333333333333334,
+        "1_share": 0.0,
+        "2_share": 0.16666666666666666,
+        "3_share": 0.0,
+        "agreement": 0.6666666666666666,
+        "quadkey": 3.003013110121233e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287446.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123301.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155309.0,
+        "tile_y": 149596.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2844543457031,
+                -24.642024357864
+              ],
+              [
+                33.2858276367188,
+                -24.642024357864
+              ],
+              [
+                33.2858276367188,
+                -24.6432725777682
+              ],
+              [
+                33.2844543457031,
+                -24.6432725777682
+              ],
+              [
+                33.2844543457031,
+                -24.642024357864
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 6.0,
+        "task_id": "18-155310-149594",
+        "0_count": 6.0,
+        "1_count": 0.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 1.0,
+        "1_share": 0.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287447.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123130.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155310.0,
+        "tile_y": 149594.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2858276367188,
+                -24.6395278806334
+              ],
+              [
+                33.2872009277344,
+                -24.6395278806334
+              ],
+              [
+                33.2872009277344,
+                -24.6407761254856
+              ],
+              [
+                33.2858276367188,
+                -24.6407761254856
+              ],
+              [
+                33.2858276367188,
+                -24.6395278806334
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 7.0,
+        "task_id": "18-155310-149595",
+        "0_count": 0.0,
+        "1_count": 6.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 0.0,
+        "1_share": 1.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287448.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123132.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155310.0,
+        "tile_y": 149595.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2858276367188,
+                -24.6407761254856
+              ],
+              [
+                33.2872009277344,
+                -24.6407761254856
+              ],
+              [
+                33.2872009277344,
+                -24.642024357864
+              ],
+              [
+                33.2858276367188,
+                -24.642024357864
+              ],
+              [
+                33.2858276367188,
+                -24.6407761254856
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 8.0,
+        "task_id": "18-155310-149596",
+        "0_count": 0.0,
+        "1_count": 6.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 0.0,
+        "1_share": 1.0,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 1.0,
+        "quadkey": 3.003013110121233e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287449.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123310.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155310.0,
+        "tile_y": 149596.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2858276367188,
+                -24.642024357864
+              ],
+              [
+                33.2872009277344,
+                -24.642024357864
+              ],
+              [
+                33.2872009277344,
+                -24.6432725777682
+              ],
+              [
+                33.2858276367188,
+                -24.6432725777682
+              ],
+              [
+                33.2858276367188,
+                -24.642024357864
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idx": 9.0,
+        "task_id": "18-155311-149594",
+        "0_count": 5.0,
+        "1_count": 1.0,
+        "2_count": 0.0,
+        "3_count": 0.0,
+        "total_count": 6.0,
+        "0_share": 0.8333333333333334,
+        "1_share": 0.16666666666666666,
+        "2_share": 0.0,
+        "3_share": 0.0,
+        "agreement": 0.6666666666666666,
+        "quadkey": 3.0030131101212314e+17,
+        "project_internal_id": 2962.0,
+        "group_internal_id": 98948.0,
+        "task_internal_id": 15287450.0,
+        "tile_z": 18.0,
+        "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a300301311012123131.jpeg?g=15384&mkt=en-US&token=REDACTED",
+        "tile_x": 155311.0,
+        "tile_y": 149594.0
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                33.2872009277344,
+                -24.6395278806334
+              ],
+              [
+                33.28857421875,
+                -24.6395278806334
+              ],
+              [
+                33.28857421875,
+                -24.6407761254856
+              ],
+              [
+                33.2872009277344,
+                -24.6407761254856
+              ],
+              [
+                33.2872009277344,
+                -24.6395278806334
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "type": "FeatureCollection",
+  "name": "projects",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2509",
+        "firebase_id": "01K7ER06TKMM8Y8G82ZKHJTWGE",
+        "name": "Compare Dates - Building Detection - Urban Growth in Lagos - Nigeria (1) Togglecorp",
+        "description": "Rapid urban expansion in Lagos challenges automated mapping models. This project compares outputs from two AI models detecting buildings from satellite imagery. By choosing the more accurate result, volunteers help improve machine-learning datasets for mapping fast-growing cities.",
+        "look_for": "Building",
+        "project_type": "3",
+        "project_type_display": "Compare Dates",
+        "organization_name": "Togglecorp",
+        "image_url": "https://backend.mapswipe.org/media/project/2509/asset/input/01K7ER2X7M8SVVHMYAF465BNGW/360_F_234717402_ytMmHbtC5vF9dboXHP3q2gFh7a3uevcT.jpg",
+        "created_at": "2025-10-13 12:16:24.404067+00:00",
+        "status": "70",
+        "status_display": "Withdrawn",
+        "area_sqkm": "20.252221252705358",
+        "centroid": "POINT(3.616974379530524 6.624963834663823)",
+        "progress": "0.04",
+        "number_of_contributor_users": "1",
+        "number_of_results": "150",
+        "number_of_results_for_progress": "150",
+        "last_contribution_date": "2025-10-13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.616974379530524,
+          6.624963834663823
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2512",
+        "firebase_id": "01K7ESF0YM1YVW6NN5845CKEJJ",
+        "name": "View Streets - Street Network Completeness - Kathmandu Valley - Nepal (1) Togglecorp",
+        "description": "This project focuses on checking the completeness of mapped streets within Kathmandu Valley. Volunteers identify missing or incomplete road segments in satellite images. The data supports improving navigation, disaster planning, and city transport management.",
+        "look_for": "Street",
+        "project_type": "7",
+        "project_type_display": "View Streets",
+        "organization_name": "Togglecorp",
+        "image_url": "https://backend.mapswipe.org/media/project/2512/asset/input/01K7ESFJDD4DRVEJZWGR2AQAJS/cover_image1.jpg",
+        "created_at": "2025-10-13 12:41:58.485327+00:00",
+        "status": "70",
+        "status_display": "Withdrawn",
+        "area_sqkm": "0.8134657267302797",
+        "centroid": "POINT(85.3027180754338 27.734861987837345)",
+        "progress": "0.0",
+        "number_of_contributor_users": "0",
+        "number_of_results": "0",
+        "number_of_results_for_progress": "0",
+        "last_contribution_date": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3027180754338,
+          27.734861987837345
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2513",
+        "firebase_id": "01K7F1D3K029KF0BXMYBT98R6V",
+        "name": "Validate Footprints - Validate - Dhaka - Bangladesh (1) American Red Cross",
+        "description": "This is an OSM building validation project type. You are looking to validate building footprints. Please use the tutorial to learn how to contribute. \\n\\n **Project description** \\n\\n Areas of Dhaka, Bangladesh were mapped in 2016 to support disaster risk reduction programming. Help us understand the quality of the OSM building data in the area. The results will be used to help evaluate if the area should be re-mapped.",
+        "look_for": "Buildings",
+        "project_type": "2",
+        "project_type_display": "Validate Footprints",
+        "organization_name": "American Red Cross",
+        "image_url": "https://backend.mapswipe.org/media/project/2513/asset/input/01K7F1JYVB8PKQG35KQB7PT7VA/dhaka.png",
+        "created_at": "2025-10-13 15:00:44.257258+00:00",
+        "status": "80",
+        "status_display": "Discarded",
+        "area_sqkm": "14.40141147653637",
+        "centroid": "POINT(90.41238989187768 23.7583002309542)",
+        "progress": "0.0",
+        "number_of_contributor_users": "0",
+        "number_of_results": "0",
+        "number_of_results_for_progress": "0",
+        "last_contribution_date": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          90.41238989187768,
+          23.7583002309542
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2515",
+        "firebase_id": "01K7GWW91NDWX0ZVF66X3GXC81",
+        "name": "Find Features - Find Buildings - Flood Response Astore - AP-Pakistan (3) HOT",
+        "description": "This MapSwipe project aims to identify building footprints in areas affected by the **recent flooding in Pakistan** (August 2025). \nBy collaborating on this project, mappers will help to **identify buildings** to understand the extent of affected areas, which will turn in helping in the response and recovery efforts. \nThe resulting data is crucial for understanding the scope of the disaster and effectively directing aid to those in need.\nThanks for your support.",
+        "look_for": "You are looking for buildings",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "HOT",
+        "image_url": "https://backend.mapswipe.org/media/project/2515/asset/input/01K7GWX82E342CRHCF9ZAS52VD/US_Army_helicopter_flies_over_a_flood-affected_area_of_Pakistan_Cut.png",
+        "created_at": "2025-10-14 08:20:07.350397+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "1392.0273549762105",
+        "centroid": "POINT(74.84203243396992 35.5019828234034)",
+        "progress": "0.0",
+        "number_of_contributor_users": "1",
+        "number_of_results": "12",
+        "number_of_results_for_progress": "12",
+        "last_contribution_date": "2025-10-14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.84203243396992,
+          35.5019828234034
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2506",
+        "firebase_id": "01K7EDWZ4SR1RECVMWWF0KAH4K",
+        "name": "Find Features - Homes in Villages - Dolakha (1) Togglecorp",
+        "description": "You are looking for homes or houses in a rural village of Nepal.",
+        "look_for": "homes",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "Togglecorp",
+        "image_url": "https://backend.mapswipe.org/media/project/2506/asset/input/01K7EDZBECWSYQA9N4NETHJDN1/bigu-gompa-in-dolkha.jpg",
+        "created_at": "2025-10-13 09:19:52.474292+00:00",
+        "status": "70",
+        "status_display": "Withdrawn",
+        "area_sqkm": "0.5524327881484031",
+        "centroid": "POINT(86.07870896783902 27.836908171930773)",
+        "progress": "0.33",
+        "number_of_contributor_users": "1",
+        "number_of_results": "24",
+        "number_of_results_for_progress": "24",
+        "last_contribution_date": "2025-10-13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.07870896783902,
+          27.836908171930773
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "6",
+        "firebase_id": "-NI88tnKIzbmAPHZq_VM",
+        "name": "Find Features - Public Health - Magaria, Niger (2) M\u00e9decins Sans Fronti\u00e8res",
+        "description": "MSF is planning a large Indoor Residual Spraying campaign against the mosquito that carries malaria. To plan the intervention and do the follow up of the spraying campaign it is needed to identify all the buildings in the campaign area.",
+        "look_for": "Buildings",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "M\u00e9decins Sans Fronti\u00e8res",
+        "image_url": "https://backend.mapswipe.org/media/project/6/asset/input/01K7E3PCK1MCQXVJH3MJ27W512/MSF196225_Medium.jpg",
+        "created_at": "2022-11-30 15:30:57.715149+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "3054.874146883078",
+        "centroid": "POINT(9.102046041003353 13.075926208295003)",
+        "progress": "0.99",
+        "number_of_contributor_users": "249",
+        "number_of_results": "449550",
+        "number_of_results_for_progress": "421734",
+        "last_contribution_date": "2022-12-20"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.102046041003353,
+          13.075926208295003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "43",
+        "firebase_id": "-NBOhCDaQSPYPMeVfA10",
+        "name": "Find Features - Mapping mobile homes - Arizona, USA (36) Arizona State University",
+        "description": "**The mapping** \\n\\n\\n Help us look for \"mobile homes\" including both manufactured homes and recreational vehicle (RV). Please take the tutorial to learn how to identify these features. \\n\\n\\n **The data** \\n\\n\\n Data will be used by researchers at Arizona State University and partners like AAMHO, the City of Phoenix and SRP to design solutions for heat resilience among mobile home owners across the state. People who live in this type of housing are 6 times more likely to suffer heat related deaths. We will better understand the nature and extent of the problem and identify precise cost and locations of where to activate support, energy innovations, and housing weatherization in order to prevent hundreds of fatalities each year.",
+        "look_for": "mobile homes",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "Arizona State University",
+        "image_url": "https://backend.mapswipe.org/media/project/43/asset/input/01K7E3R5V2ZYW5YMH1A45DYBM0/demo_cover.png",
+        "created_at": "2022-09-12 07:58:39.217053+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "4893.96778746156",
+        "centroid": "POINT(-114.49220039592907 32.88376333380176)",
+        "progress": "0.99",
+        "number_of_contributor_users": "860",
+        "number_of_results": "1521762",
+        "number_of_results_for_progress": "1494540",
+        "last_contribution_date": "2023-01-17"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.49220039592907,
+          32.88376333380176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "55",
+        "firebase_id": "-MZ3drBQ6Dh7rheLrHY-",
+        "name": "Find Features - Forecast-based Financing - Sudan (22) Red Cross Red Crescent Climate Centre",
+        "description": "Help the Red Cross Red Crescent Climate Centre in identifying areas where people live in Sudan. Swipe slowly through the satellite imagery and mark anything that looks like a building and/or road. The data will be used to support forecast-based financing projects on floods and droughts.",
+        "look_for": "Buildings and Roads",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "Red Cross Red Crescent Climate Centre",
+        "image_url": "https://backend.mapswipe.org/media/project/55/asset/input/01K7E3RP0RW0XTSTJ5GCQYPMAF/buehnenbild_Darfur_Menschenmenge.jpg",
+        "created_at": "2021-04-24 16:16:33.161141+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "4912.210640093994",
+        "centroid": "POINT(22.888356304376963 12.756266941750075)",
+        "progress": "0.99",
+        "number_of_contributor_users": "640",
+        "number_of_results": "905160",
+        "number_of_results_for_progress": "898008",
+        "last_contribution_date": "2021-12-08"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.888356304376963,
+          12.756266941750075
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2516",
+        "firebase_id": "01K7H065YS65S297K9AS5918QA",
+        "name": "Find Features - Find Buildings - Flood Response 2025  Astore - AP-Pakistan (3) HOT",
+        "description": "This MapSwipe project aims to **identify building footprints** in areas affected by the recent **flooding in Pakistan (August 2025)**. \nBy collaborating on this project, mappers will help to identify buildings to understand the extent of affected areas, which will turn in helping in the response and recovery efforts. \nThe resulting data is crucial for understanding the scope of the disaster and effectively directing aid to those in need.\nThanks for your collaboration.",
+        "look_for": "Buildings",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "HOT",
+        "image_url": "https://backend.mapswipe.org/media/project/2516/asset/input/01K7H1B1D3RQ23E7YFV6GZ9EK7/US_Army_helicopter_flies_over_a_flood-affected_area_of_Pakistan_Cut.png",
+        "created_at": "2025-10-14 09:17:57.594472+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "1392.0273549762105",
+        "centroid": "POINT(74.84203243396992 35.5019828234034)",
+        "progress": "1.0",
+        "number_of_contributor_users": "445",
+        "number_of_results": "565740",
+        "number_of_results_for_progress": "463650",
+        "last_contribution_date": "2025-10-29"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.84203243396992,
+          35.5019828234034
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2517",
+        "firebase_id": "01K7H2YBXBBB8H3FCMD98G8F8N",
+        "name": "Find Features - Find - Buildings - Upat\u00e1, Bolivar-Venezuela (1) HOT",
+        "description": "Mapping in areas of high multidimensional poverty is of crucial relevance, as women play an essential role in** indigenous populations**, and contribute significantly to social cohesion, cultural preservation and community sustainability. \nIn addition, women in indigenous communities are transmitters of local knowledge and assume fundamental responsibilities in the management of natural resources and environmental preservation. Women\u2019s active participation in their communities strengthens resilience in the face of socioeconomic and environmental challenges. In the context of the Amazon, mapping becomes critically important when considering vulnerability and the need to preserve valuable natural resources. When women in these communities have detailed information of their surroundings, it facilitates strategic planning against threats, and contributes to the implementation of adaptation and protection measures, to ensure the long-term survival of the region and its population.\nImage: \u00a9Rei2Rey / Wikimedia Commons / CC-BY-SA-3.0 / GFDL",
+        "look_for": "You are looking for: buildings",
+        "project_type": "1",
+        "project_type_display": "Find Features",
+        "organization_name": "HOT",
+        "image_url": "https://backend.mapswipe.org/media/project/2517/asset/input/01K7H2YT9CXEFWZVAEN8H8J8J7/Upata.JPG",
+        "created_at": "2025-10-14 10:06:07.275638+00:00",
+        "status": "75",
+        "status_display": "Finished",
+        "area_sqkm": "748.0441932907204",
+        "centroid": "POINT(-62.360876832035835 8.014680005459482)",
+        "progress": "1.0",
+        "number_of_contributor_users": "188",
+        "number_of_results": "223254",
+        "number_of_results_for_progress": "171270",
+        "last_contribution_date": "2025-10-16"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.360876832035835,
+          8.014680005459482
+        ]
+      }
+    }
+  ]
+}
