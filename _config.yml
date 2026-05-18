@@ -101,6 +101,10 @@ defaults:
       toc: true
 
 # Build exclusions (Jekyll core)
+# Note: setting `exclude` overrides Jekyll's defaults, so the vendor/cache
+# entries below must be re-listed explicitly — otherwise CI's `bundle install
+# --path vendor/bundle` leaks gem files (e.g. jekyll's own site_template
+# _posts) into the build and breaks it.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -109,3 +113,10 @@ exclude:
   - .pre-commit-config.yaml
   - typos.toml
   - .lycheeignore
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
