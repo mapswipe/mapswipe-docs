@@ -7,80 +7,50 @@ permalink: /project_types/validate_footprints/
 
 # Project Type - Validate Footprints
 
+An image with a footprint overlay. The question is whether this footprint is correctly approximating a structure on the shown image, which can be answered with *yes*, *no* or *Not sure*. Additionally, a button is shown which hides the footprint overlay.
+
+![](/assets/project_types/project_types/images/agfvdlp4ksifmdnf0wfncz36s.png)
+
+Validate Footprints projects have `projectType = 2`.
+
 ## Project
 Validate Footprints can be supplied with geometries in three separate ways.
 1. by specifying a HOT Tasking Manager Project ID and an object [filter](https://docs.ohsome.org/ohsome-api/v1/filter.html)
 2. by specifying an url to the data (e.g. an [ohsomeAPI](https://docs.ohsome.org/ohsome-api/v1/) call)
 3. by uploading an aoi and an object [filter](https://docs.ohsome.org/ohsome-api/v1/filter.html)
 
+In addition to the common project fields documented in the [data model](/project_types/), Validate Footprints projects carry the following project-type-specific fields:
 
-```json
-{
-  "TMId": "11193",
-  "contributorCount": 1,
-  "created": "2021-12-10T18:05:26.090515Z",
-  "createdBy": "X0zTSyvY0khDfRwc99aQfIjTEPK2",
-  "filter": "building=* and geometry:polygon",
-  "groupMaxSize": 0,
-  "groupSize": 30,
-  "image": "https://firebasestorage.googleapis.com/v0/b/dev-mapswipe.appspot.com/o/projectImages%2Fimage.jpeg?alt=media",
-  "inputType": "TMId",
-  "isFeatured": false,
-  "lookFor": "Buildings",
-  "name": "OSM Building Validation - Indonesia (1)\nAmerican Red Cross",
-  "progress": 0,
-  "projectDetails": "The Red Cross Climate Centre, Indonesian Red Cross (Palang Merah Indonesia/PMI), IFRC, British Red Cross and Australian Red Cross are implementing a programme where the data contributed will be used by the Red Cross to assist in forecasting future disaster impacts, by knowing in advance what is likely to be impacted and its exposure and vulnerability. The information will help implementation of early action activities to take place before a disaster strikes, contributing to reduce risk, prepare for effective response and ultimately to strengthen community resilience.",
-  "projectId": "-Mq_IVluLteQRS75gWej",
-  "projectNumber": "1",
-  "projectRegion": "Indonesia",
-  "projectTopic": "OSM Building Validation",
-  "projectType": 2,
-  "requestingOrganisation": "American Red Cross",
-  "requiredResults": 286302,
-  "resultCount": 0,
-  "status": "private_active",
-  "teamId": "-Mq_EQlzqmYytCspuFSq",
-  "tileServer": {
-    "apiKey": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "credits": "© 2019 Maxar",
-    "name": "maxar_premium",
-    "url": "https://services.digitalglobe.com/earthservice/tmsaccess/tms/1.0.0/DigitalGlobe%3AImageryTileService@EPSG%3A3857@jpg/{z}/{x}/{y}.jpg?connectId={key}"
-  },
-  "tutorialId": "tutorial_-MO3ky5z--RY8PC1lONa",
-  "verificationNumber": 3
-}
-```
+| Parameter         | Type              | Description                                                                                                                                                                                                  |
+|-------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **tileServer**    | object            | Raster tile server configuration used as the imagery background — includes a server `name`, `url`, `credits`, and an optional `apiKey`.                                                                      |
+| **inputType**     | enum (string)     | How the input geometries were supplied. One of `aoi_file`, `link`, `TMId` — corresponding to the three creation methods above.                                                                              |
+| **TMId**          | string (optional) | The HOT Tasking Manager project ID, when `inputType = TMId`.                                                                                                                                                 |
+| **filter**        | string (optional) | The ohsome [filter](https://docs.ohsome.org/ohsome-api/v1/filter.html) expression, when applicable.                                                                                                          |
+| **customOptions** | list (optional)   | Optional custom answer options shown to the contributor (each with a value, title, description, icon, iconColor, and optional sub-options) — overrides the default Yes/No/Not sure choices.                  |
+
 ## Group
-The validate groups follow the standard group structure.
-```json
-{
-  "finishedCount": 0,
-  "groupId": "g100",
-  "numberOfTasks": 30,
-  "progress": 0,
-  "projectId": "-Mq_FxTdV2QJHsxQcvFk",
-  "requiredCount": 3
-}
-```
+Validate Footprints groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
+
+| Parameter   | Type   | Description       |
+|-------------|--------|-------------------|
+| **groupId** | string | ID of the group.  |
 
 ## Task
 
-| Parameter                           | Description                                                                            |
-|-------------------------------------|----------------------------------------------------------------------------------------|
-| *Project Type Specific Information* |                                                                                        |
-| **GeoJSON**                         | Each task has a polygon geometry, which usually outlines a building or another object. |
-
-```json
-{
-  "feature_id": 0,
-  "geojson": {
-    "coordinates": [ [ [ 5.15910196973, 13.48686869581 ], [ 5.15937974751, 13.48686869581 ], [ 5.15937974751, 13.48742425137 ], [ 5.15910196973, 13.48742425137 ], [ 5.15910196973, 13.48686869581 ] ] ],
-    "type": "Polygon"
-  },
-  "id": "13564_100_0",
-  "properties": "feature_geometries, e.g. attributes from osm"
-}
-```
+| Parameter   | Type   | Description                                                                                                   |
+|-------------|--------|---------------------------------------------------------------------------------------------------------------|
+| **taskId**  | string | ID of the task.                                                                                               |
+| **geojson** | object | GeoJSON polygon (typically a building or other feature outline) for the user to validate against the imagery. |
 
 ## Result
-The result for a Validate Footprints project are explicitly given via the "yes", "no" and "not sure" buttons.
+Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value`.
+
+When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
+
+| Value | Title    | Description                                                  |
+|-------|----------|--------------------------------------------------------------|
+| `0`   | No       | The shape doesn't match a building in the image.             |
+| `1`   | Yes      | The shape does outline a building in the image.              |
+| `2`   | Not Sure | You're not sure or there is cloud cover / bad imagery.       |
+| `3`   | Offset   | Building outline is correct, but not aligned to the imagery. |

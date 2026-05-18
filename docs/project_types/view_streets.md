@@ -7,83 +7,44 @@ permalink: /project_types/view_streets/
 
 # Project Type - View Streets
 
+An imagery version of the Validate Footprint project type where users can look for a specific feature (set by the project managers) in a set of Mapillary images.
+
+![](/assets/project_types/project_types/images/k9nzk7129lqaqztgp6d67mzad.png)
+
+View Streets projects have `projectType = 7`.
+
 ## Project
 The View Streets project type takes an AOI geometry as an input and returns corresponding Mapillary images to MapSwipe.
 
-```json
-{
-  "contributorCount": 1,
-  "created": "2025-10-12T09:33:48.575137+00:00",
-  "createdBy": "Tyf9vhtd8aZCgLlaRWQGzBE52w82",
-  "customOptions": [
-    {
-      "description": "the shape does outline a building in the image",
-      "icon": "checkmark-outline",
-      "iconColor": "#388E3C",
-      "title": "Yes",
-      "value": 1
-    },
-    {
-      "description": "the shape doesn't match a building in the image",
-      "icon": "close-outline",
-      "iconColor": "#D32F2F",
-      "title": "No",
-      "value": 0
-    },
-    {
-      "description": "if you're not sure or unsure about the image",
-      "icon": "remove-outline",
-      "iconColor": "#616161",
-      "title": "Not Sure",
-      "value": 2
-    }
-  ],
-  "groupMaxSize": 25,
-  "groupSize": 25,
-  "isFeatured": false,
-  "language": "en-us",
-  "lookFor": "Roads",
-  "name": "View Streets - Street Mapping for Urban Planning in Inda - India (1) American Red Cross",
-  "numberOfGroups": 7,
-  "progress": 4,
-  "projectDetails": "This project focuses on mapping streets and road networks in urban areas of India. Volunteers identify streets visible in satellite imagery to ensure they are included in the maps. The results will improve street-level map coverage for planning, navigation, and local services.",
-  "projectId": "01K7BW9RMYQ6FCD98QFBAEN31K",
-  "projectInstruction": "Look for",
-  "projectNumber": 1,
-  "projectRegion": "India",
-  "projectTopic": "Street Mapping for Urban Planning in Inda",
-  "projectTopicKey": "view streets - street mapping for urban planning in inda - india (1) american red cross",
-  "projectType": 7,
-  "requestingOrganisation": "American Red Cross",
-  "requiredResults": 513,
-  "resultCount": 0,
-  "status": "active",
-  "tutorialId": "tutorial_01K718A8H8XNY0EY66BCWZXG10",
-  "verificationNumber": 3
-}
-```
+In addition to the common project fields documented in the [data model](/project_types/), View Streets projects carry the following project-type-specific fields:
+
+| Parameter          | Type            | Description                                                                                                                        |
+|--------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| **customOptions**  | list (optional) | Custom answer options shown to the contributor (each with a value, title, description, icon, iconColor, and optional sub-options). |
+| **numberOfGroups** | int             | Total number of groups generated for the project.                                                                                  |
 
 ## Group
-The groups follow the standard Validate Footprints group structure.
-```json
-{
-  "finishedCount" : 0,
-  "groupId" : "g0",
-  "numberOfTasks" : 25,
-  "progress" : 0,
-  "projectId" : "01K7BW9RMYQ6FCD98QFBAEN31K",
-  "requiredCount" : 3
-}
-```
+View Streets groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
+
+| Parameter   | Type   | Description       |
+|-------------|--------|-------------------|
+| **groupId** | string | ID of the group.  |
 
 ## Task
-The task is a Base64-encoded, GZIP-compressed string. It can be decoded and decompressed to view the original content.
+The task payload is a Base64-encoded, GZIP-compressed string; clients decode and decompress it before rendering. Note that for View Streets the underlying `taskId` is an `int` rather than a `string`.
 
-```json
-{
-  "g0": "H4sIAAAAAAAC/62Vu0pGQQyEX+Xn1BZJJlc7fy8goqCNiFiIiqCF4qUS390cbK0kbLnLR5idmVx/La9vL08Pdx/H98vuZiE+ie1lXZxenfvR/kHl+dF27/AMfLLsbJaP2/fn33daQcFKmgJNXy8f314+X39vH2n53tn8E81uJrAUdhRoFK1CocLGVmpik2x1A8CmAXLL0bEjNFn7OHHUrCKg9DAm93CeREtlpSiMXMQxiQazJxeReaFk9Buj2aXSisuwsY0FTEUeBaVRYxshDKvazCmjgoAUqZYsJaic1VrSIErO4T6cdIBKE0GmOSt285SEvCqy8zg6Nrcz1JoPM/hoQbEJa1vbUxGus1EPRCti3g7sqppkV3tDqdiim3W2oaLFCKCrxKh/cjSQghVdbe9uv5wVW6Wbdd2PPfms/Yiq49LsYsrC7NhYg95x5xaEh9dBry+zbJegi+oP9s0PuctVnukIAAA="
-}
-```
+| Parameter   | Type   | Description                                |
+|-------------|--------|--------------------------------------------|
+| **taskId**  | int    | ID of the task (integer for View Streets). |
+| **groupId** | string | ID of the group the task belongs to.       |
 
 ## Result
-The results for a View Streets project, similar to the Validate Footprints project, are explicitly given via custom options that can be set by the project creator.
+Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project, since answers are given via custom options set by the project creator.
+
+When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
+
+| Value | Title    | Description                                                  |
+|-------|----------|--------------------------------------------------------------|
+| `0`   | No       | The object you are looking for is NOT in the image.          |
+| `1`   | Yes      | The object you are looking for is in the image.              |
+| `2`   | Not Sure | You're not sure or there is bad imagery.                     |

@@ -6,263 +6,55 @@ permalink: /project_types/assess_images/
 ---
 
 # Project Type - Assess Images
+
+An image with a bounding box (annotation) surrounding the class set by the project manager is displayed. The same image can have multiple annotations, in which case the same image is displayed again but with a different annotation. Users select one of the custom options set, usually 'Yes', 'No', 'Maybe'.
+
+![](/assets/project_types/project_types/images/xh147pt4dbuniejyi6maffrd9.png)
+
+Assess Images projects have `projectType = 10` (`VALIDATE_IMAGE`).
+
 ## COCO File Format
 The Assess Images project type is created using the following sample COCO json file, as shown in the [sample dataset](/assets/project_sample_data/assess_images/coco_sample.json).
 
-## Project
-Assess Images projects can be supplied with a COCO file
+To build a COCO file from a folder of images you already host, see the helper examples for [Google Drive](/examples/generate-coco-from-drive/) and [Dropbox](/examples/generate-coco-from-dropbox/).
 
-```
-    {
-      "contributorCount": 0,
-      "created": "2025-10-17T09:33:25.446892+00:00",
-      "createdBy": "23",
-      "customOptions": [
-        {
-          "description": "the image contains the feature",
-          "icon": "checkmark-outline",
-          "iconColor": "#388E3C",
-          "title": "Yes",
-          "value": 1
-        },
-        {
-          "description": "the image does not contain the feature",
-          "icon": "close-outline",
-          "iconColor": "#D32F2F",
-          "title": "No",
-          "value": 0
-        },
-        {
-          "description": "it's not clear if the image contains the feature",
-          "icon": "remove-outline",
-          "iconColor": "#616161",
-          "title": "Not Sure",
-          "value": 2
-        }
-      ],
-      "groupMaxSize": 10,
-      "groupSize": 10,
-      "isFeatured": false,
-      "language": "en-us",
-      "lookFor": "humans",
-      "name": "Assess Images - Humans - Worldwide (1) Togglecorp (test)",
-      "progress": 0,
-      "projectDetails": "Look for humans",
-      "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-      "projectInstruction": "Can you see any humans?",
-      "projectNumber": 1,
-      "projectRegion": "Worldwide",
-      "projectTopic": "Humans",
-      "projectTopicKey": "assess images - humans - worldwide (1) togglecorp (test)",
-      "projectType": 10,
-      "requestingOrganisation": "Togglecorp (test)",
-      "requiredResults": 81,
-      "resultCount": 0,
-      "status": "active",
-      "tutorialId": "tutorial_01K60ZMFGT7WRFH38W8PZ93V4M",
-      "verificationNumber": 3
-    }
-```
+## Project
+Assess Images projects can be supplied with a COCO file.
+
+In addition to the common project fields documented in the [data model](/project_types/), Assess Images projects carry the following project-type-specific fields:
+
+| Parameter         | Type            | Description                                                                                                                                                              |
+|-------------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **customOptions** | list (optional) | Custom answer options shown to the contributor (each with a value, title, description, icon, iconColor, and optional sub-options). Defaults are Yes/No when not supplied. |
 
 ## Group
-The group tasks created in Firebase
+Each group contains a set of image tasks generated from the supplied COCO file. Assess Images groups have no project-type-specific fields beyond the [common group fields](/project_types/#groups). Each group is identified by:
 
-```
-    {
-      "-OX8K9Ia2oSUkBSvJPrR": {
-        "g100": {
-          "groupId": "g100",
-          "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-          "numberOfTasks": 25,
-          "requiredCount": 3,
-          "finishedCount": 0,
-          "progress": 0
-        },
-        "g101": {
-          "groupId": "g101",
-          "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-          "numberOfTasks": 25,
-          "requiredCount": 3,
-          "finishedCount": 0,
-          "progress": 0
-        },
-        "g102": {
-          "groupId": "g102",
-          "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-          "numberOfTasks": 25,
-          "requiredCount": 3,
-          "finishedCount": 0,
-          "progress": 0
-        },
-        "g103": {
-          "groupId": "g103",
-          "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-          "numberOfTasks": 25,
-          "requiredCount": 3,
-          "finishedCount": 0,
-          "progress": 0
-        },
-    }
-```
+| Parameter   | Type   | Description       |
+|-------------|--------|-------------------|
+| **groupId** | string | ID of the group.  |
 
 ## Task
-The task structure of the Assess Images project type varies from the rest.
-> Note: only task `g100` is added below
+The task structure of the Assess Images project type varies from the rest — each task references an image and an annotation (bounding box) within that image, rather than a tile coordinate:
 
-```
-    [
-      {
-        "annotationId": "200887",
-        "bbox": [
-          388.66,
-          69.92,
-          109.41,
-          277.62
-        ],
-        "fileName": "000000397133.jpg",
-        "height": 427,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "200887",
-        "url": "https://www.dropbox.com/scl/fi/qix2itz2ioncwct8iq65d/000000397133.jpg?rlkey=yqkvbfzmzxklp68d0zulj2ci4&st=vmg9ijfs&dl=1",
-        "width": 640
-      },
-      {
-        "annotationId": "1218137",
-        "bbox": [
-          0,
-          262.81,
-          62.16,
-          36.77
-        ],
-        "fileName": "000000397133.jpg",
-        "height": 427,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "1218137",
-        "url": "https://www.dropbox.com/scl/fi/qix2itz2ioncwct8iq65d/000000397133.jpg?rlkey=yqkvbfzmzxklp68d0zulj2ci4&st=vmg9ijfs&dl=1",
-        "width": 640
-      },
-      {
-        "annotationId": "235634",
-        "bbox": [
-          47.19,
-          296.12,
-          28.3,
-          33.17
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "235634",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "236267",
-        "bbox": [
-          32.75,
-          298.94,
-          16.52,
-          29.22
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "236267",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "236973",
-        "bbox": [
-          320.16,
-          275.05,
-          27.06,
-          104.53
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "236973",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "237362",
-        "bbox": [
-          10.05,
-          302.96,
-          13.7,
-          25.69
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "237362",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "240624",
-        "bbox": [
-          266.37,
-          293.13,
-          23.97,
-          88.96
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "240624",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "1729065",
-        "bbox": [
-          369.5,
-          278.52,
-          5.5,
-          45.65
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "1729065",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "2155199",
-        "bbox": [
-          290.03,
-          299.79,
-          15.24,
-          19.87
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "2155199",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      },
-      {
-        "annotationId": "2161724",
-        "bbox": [
-          302.2,
-          298.22,
-          12.73,
-          18.73
-        ],
-        "fileName": "000000480985.jpg",
-        "height": 500,
-        "projectId": "01K7RR8N268FRMXPN0P3186PSK",
-        "taskId": "2161724",
-        "url": "https://www.dropbox.com/scl/fi/vjdvvla0tyhfpde7yige9/000000480985.jpg?rlkey=35zs7wgdxpck58v5mz64jqt7u&st=2q3o8e37&dl=1",
-        "width": 375
-      }
-    ]
-```
+| Parameter        | Type                           | Description                                                                          |
+|------------------|--------------------------------|--------------------------------------------------------------------------------------|
+| **taskId**       | string                         | ID of the task.                                                                      |
+| **url**          | string                         | URL of the image to display.                                                         |
+| **fileName**     | string                         | Filename of the source image (from the COCO `images.file_name`).                     |
+| **width**        | int (optional)                 | Pixel width of the image.                                                            |
+| **height**       | int (optional)                 | Pixel height of the image.                                                           |
+| **annotationId** | string (optional)              | ID of the COCO annotation (bounding box) being assessed.                             |
+| **bbox**         | `list[float]` (optional)       | Bounding box in COCO format `[x, y, width, height]` (pixel coordinates).             |
+| **segmentation** | `list[list[float]]` (optional) | Optional polygon segmentation (list of `[x, y, …]` rings) from the COCO annotation.  |
 
-## Result Structure
-The result for Assess Images projects are explicitly given via the “yes”, “no” buttons (which are configurable custom options).
+## Result
+Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer values come from each custom option's `value` defined on the project.
+
+When the project creator does not supply `customOptions`, the backend falls back to the following defaults:
+
+| Value | Title    | Description                                              |
+|-------|----------|----------------------------------------------------------|
+| `0`   | No       | The image does not contain the feature.                  |
+| `1`   | Yes      | The image contains the feature.                          |
+| `2`   | Not Sure | It's not clear if the image contains the feature.        |

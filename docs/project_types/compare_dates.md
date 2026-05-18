@@ -7,89 +7,50 @@ permalink: /project_types/compare_dates/
 
 # Project Type - Compare Dates
 
+Two images are shown, the upper picture shows a scene before e.g. a disaster, while the lower picture shows the scene afterwards. By tapping you can classify the scene as *yes*, *maybe* or *bad_imagery*. Project managers can define which objects to look for, e.g. "buildings". Furthermore, they can specify the tile server of the background satellite imagery, e.g. "bing" or a custom tile server.
+
+![](/assets/project_types/project_types/images/gbaxwx4wnsjdfcshyh3z7exdw.png)
+
+Compare Dates projects have `projectType = 3`.
+
 ## Project
-The structure and creation steps follow the similar pattern of the Find Features project type. Project Structure example for a project which was created via HOT Tasking Manager Project ID.
-```json
-{
-  "contributorCount": 0,
-  "created": "2021-12-23T14:14:52.179930Z",
-  "createdBy": "X0zTSyvY0khDfRwc99aQfIjTEPK2",
-  "groupMaxSize": 0,
-  "groupSize": 25,
-  "image": "https://firebasestorage.googleapis.com/v0/b/dev-mapswipe.appspot.com/o/projectImages%2FEQ%2BEarthquake.png?alt=media&token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "isFeatured": false,
-  "lookFor": "damaged buildings",
-  "name": "Earthquake - Experimental Damage Assessment - Les Cayes (Haiti) (1)\nSimon BA",
-  "progress": 0,
-  "projectDetails": "In attempt to provide a rapid damage assessment for the 7.2 magnitude earthquake on August 14, please slowly compare the images to determine if damage is visible in the post-event scene. This methodology is still being tested and should not replace traditional damage assessment methods. Imagery is provided through [Maxar's Open Data Program](https://www.maxar.com/open-data) and hosted by [MapBox](https://www.mapbox.com/).",
-  "projectId": "-Mrbd5ArF4lb_GoYG2I5",
-  "projectNumber": "1",
-  "projectRegion": "Les Cayes (Haiti)",
-  "projectTopic": "Earthquake - Experimental Damage Assessment",
-  "projectType": 3,
-  "requestingOrganisation": "Simon BA",
-  "requiredResults": 3636,
-  "resultCount": 0,
-  "status": "inactive",
-  "tileServer": {
-    "apiKey": "",
-    "credits": "© 2019 Maxar",
-    "name": "maxar_premium",
-    "url": "https://services.digitalglobe.com/earthservice/tmsaccess/tms/1.0.0/DigitalGlobe%3AImageryTileService@EPSG%3A3857@jpg/{z}/{x}/{y}.jpg?connectId={key}"
-  },
-  "tileServerB": {
-    "credits": "© Maxar, MapBox",
-    "name": "custom",
-    "url": "https://api.mapbox.com/v4/mapboxsatellite.haiti-post-2021/{z}/{x}/{y}.webp?sku=101Fw3jtBuWI5"
-  },
-  "tutorialId": "tutorial_-MhJtd9ePFOw8Vs6xwZ2",
-  "verificationNumber": 3,
-  "zoomLevel": 19
-}
-```
+The structure and creation steps follow the similar pattern of the Find Features project type. Projects can also be created via a HOT Tasking Manager Project ID.
+
+In addition to the common project fields documented in the [data model](/project_types/), Compare Dates projects carry the following project-type-specific fields:
+
+| Parameter       | Type   | Description                                                                                                                                |
+|-----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **zoomLevel**   | int    | Web Mercator zoom level at which tiles are served.                                                                                         |
+| **tileServer**  | object | Raster tile server configuration for the "before" imagery (upper image) — includes a server `name`, `url`, `credits`, and optional `apiKey`. |
+| **tileServerB** | object | Raster tile server configuration for the "after" imagery (lower image) — same shape as `tileServer`.                                       |
 
 ## Group
-| Parameter    | Description                                                                                                |
-|--------------|------------------------------------------------------------------------------------------------------------|
-| **Geometry** | The Compare groups save the bounding box coordinates in fields labeled xMax, xMin, yMax and yMin. |
+Compare Dates groups carry tile-map-service bounding-box tile coordinates on top of the common group fields:
 
-```json
-{
-  "finishedCount": 0,
-  "groupId": "g101",
-  "numberOfTasks": 24,
-  "progress": 0,
-  "projectId": "-Mrbd5ArF4lb_GoYG2I5",
-  "requiredCount": 3,
-  "xMax": "154722",
-  "xMin": "154715",
-  "yMax": "235151",
-  "yMin": "235149"
-}
-```
+| Parameter | Type | Description                                          |
+|-----------|------|------------------------------------------------------|
+| **xMax**  | int  | Maximum tile-X coordinate covered by the group.      |
+| **xMin**  | int  | Minimum tile-X coordinate covered by the group.      |
+| **yMax**  | int  | Maximum tile-Y coordinate covered by the group.      |
+| **yMin**  | int  | Minimum tile-Y coordinate covered by the group.      |
 
 ## Task
-| Parameter                           | Description                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *Project Type Specific Information* |                                                                                                                                                                                                                                                                                                                                                                                        |
-| **Task X**                          | The x coordinate characterises the longitudinal position of the tile in the overall tile map system taken the zoom level into account. The x coordinates increase from west to east starting at a longitude of -180 degrees.                                                                                                                                                           |
-| **Task Y**                          | The y coordinate characterises the latitudinal position of the tile in the overall tile map system taken the zoom level into account. The latitude is clipped to range from circa -85 to 85 degrees. The y coordinates increase from north to south starting at a latitude of around 85 degrees.                                                                                       |
-| **Geometry**                        | Each task has a polygon geometry, which can be generated by its x, y and z coordinates. At the equator the task geometry is a square with an edge length of around 150 metres covering circa 0.0225 square kilometres. Due to the web Mercator projector the task geometry will be clinched with increasing distance to the equator. At the same time the area per task will decrease. |
-| **URL**                             | Image for the tile at timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                            |
-| **URL 2**                           | Image for the tile after timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                         |
 
-```json
-{
-  "groupId": "g101",
-  "projectId": "-Mrbd5ArF4lb_GoYG2I5",
-  "taskId": "19-154715-235149",
-  "taskX": "154715",
-  "taskY": "235149",
-  "url": "https://services.digitalglobe.com/earthservice/tmsaccess/tms/1.0.0/DigitalGlobe%3AImageryTileService@EPSG%3A3857@jpg/19/154715/289138.jpg",
-  "urlB": "https://api.mapbox.com/v4/mapboxsatellite.haiti-post-2021/19/154715/235149.webp?sku=101Fw3jtBuWI5"
-}
-```
+| Parameter    | Type              | Description                                                                                                                                                                                                                                                                                                                                                                            |
+|--------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **taskX**    | int (optional)    | The x coordinate characterises the longitudinal position of the tile in the overall tile map system taken the zoom level into account. The x coordinates increase from west to east starting at a longitude of -180 degrees.                                                                                                                                                           |
+| **taskY**    | int (optional)    | The y coordinate characterises the latitudinal position of the tile in the overall tile map system taken the zoom level into account. The latitude is clipped to range from circa -85 to 85 degrees. The y coordinates increase from north to south starting at a latitude of around 85 degrees.                                                                                       |
+| **geometry** | string            | Each task has a polygon geometry, which can be generated by its x, y and z coordinates. At the equator the task geometry is a square with an edge length of around 150 metres covering circa 0.0225 square kilometres. Due to the web Mercator projector the task geometry will be clinched with increasing distance to the equator. At the same time the area per task will decrease. |
+| **url**      | string (optional) | Image for the tile at timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                            |
+| **urlB**     | string (optional) | Image for the tile after timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                         |
 
 ## Result
-Results contain information on the user classifications. However, only “Yes” (1), “Maybe” (2) and “Bad Imagery” (3) classifications are stored as results.
-Whenever users indicate “No Change” by just swiping to the next task, no data entry is created.
+Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
+
+| Value | Meaning     |
+|-------|-------------|
+| `1`   | Yes         |
+| `2`   | Maybe       |
+| `3`   | Bad Imagery |
+
+Whenever users indicate "No Change" by just swiping to the next task, no data entry is created.

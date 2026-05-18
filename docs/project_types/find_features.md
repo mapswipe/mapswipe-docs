@@ -7,93 +7,52 @@ permalink: /project_types/find_features/
 
 # Project Type - Find Features
 
+A 6 squares layout is used for this project type. By tapping you can classify a tile of satellite imagery as *yes*, *maybe* or *bad_imagery*. Project managers can define which objects to look for, e.g. "buildings". Furthermore, they can specify the tile server of the background satellite imagery, e.g. "bing" or a custom tile server.
+
+![](/assets/project_types/project_types/images/qyioxvg73f3vdmmu6wlvrx3ib.png)
+
+Find Features projects have `projectType = 1`.
+
 ## Project
-To create a Find Features project, you need to add all information and upload a bounding polygon as well as fill in some information about your project. Below you can find an example for a created Find Features project in firebase.
+To create a Find Features project, you need to add all information and upload a bounding polygon as well as fill in some information about your project.
 
-```json
-{
-	"contributorCount": 1,
-	"created": "2021-12-23T13:47:27.346088Z",
-	"createdBy": "X0zTSyvY0khDfRwc99aQfIjTEPK2",
-	"groupMaxSize": 0,
-	"groupSize": 25,
-	"image": "https://firebasestorage.googleapis.com/v0/b/dev-mapswipe.appspot.com/o/projectImages%2Fbuildarea.png?alt=media&token=07505c0e-0f80-454c-b446-9b82a73d9d3e",
-	"isFeatured": false,
-	"lookFor": "Buildings",
-	"name": "Find with Bing Imagery Z18 - Kenya (1)\nMapSwipe Devs",
-	"progress": 0,
-	"projectDetails": "This is a \"normal\" Find project. The project uses Bing Imagery at zoom level 18",
-	"projectId": "-MrbXgHx8YJDt6cTIyGA",
-	"projectNumber": "1",
-	"projectRegion": "Kenya",
-	"projectTopic": "Find with Bing Imagery Z18",
-	"projectType": 1,
-	"requestingOrganisation": "MapSwipe Devs",
-	"requiredResults": 148158,
-	"resultCount": 0,
-	"status": "active",
-	"tileServer": {
-		"apiKey": "",
-		"credits": "imagery credits of project",
-		"name": "bing",
-		"url": "https://ecn.t0.tiles.virtualearth.net/tiles/a{quad_key}.jpeg?g=1&token={key}"
-	},
-	"tutorialId": "tutorial_-MnNaUEShyefFtMG6_5-",
-	"verificationNumber": 3,
-	"zoomLevel": 18
-}
-```
+In addition to the common project fields documented in the [data model](/project_types/), Find Features projects carry the following project-type-specific fields:
 
-## Groups
+| Parameter      | Type   | Description                                                                                                |
+|----------------|--------|------------------------------------------------------------------------------------------------------------|
+| **zoomLevel**  | int    | Web Mercator zoom level at which tiles are served.                                                         |
+| **tileServer** | object | Raster tile server configuration — includes a server `name`, `url`, `credits`, and an optional `apiKey`.   |
+
+## Group
 The grouping algorithm uses the extent of a project as an input and generates chunks of tasks lying next to each other.
 Each group has a height of three tasks and a width of approximately 40 tasks.
 
-| Parameter    | Description                                                                                          |
-|--------------|------------------------------------------------------------------------------------------------------|
-| **Geometry** | The Find Features groups save the bounding box coordinates in fields labeled xMax, xMin, yMax and yMin. |
+In addition to the common group fields, Find Features groups carry tile-map-service bounding-box coordinates:
 
-```json
-{
-  "finishedCount": 0,
-  "groupId": "g101",
-  "numberOfTasks": 54,
-  "progress": 0,
-  "projectId": "-MrbXgHx8YJDt6cTIyGA",
-  "requiredCount": 3,
-  "xMax": "160239",
-  "xMin": "160222",
-  "yMax": "129763",
-  "yMin": "129761"
-}
-```
+| Parameter | Type | Description                                                  |
+|-----------|------|--------------------------------------------------------------|
+| **xMax**  | int  | Maximum tile-X coordinate covered by the group.              |
+| **xMin**  | int  | Minimum tile-X coordinate covered by the group.              |
+| **yMax**  | int  | Maximum tile-Y coordinate covered by the group.              |
+| **yMin**  | int  | Minimum tile-Y coordinate covered by the group.              |
 
-## Tasks
+## Task
 Tasks are saved for tutorials, since their spatial information can be derived from the spatial extent of the corresponding group. Here, the tutorials are saved based on the project that it is derived from.
 
-| Parameter                           | Description                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *Project Type Specific Information* |                                                                                                                                                                                                                                                                                                                                                                                        |
-| **Tile X**                          | The x coordinate characterises the longitudinal position of the tile in the overall tile map system taken the zoom level into account. The x coordinates increase from west to east starting at a longitude of -180 degrees.                                                                                                                                                           |
-| **Tile Y**                          | The y coordinate characterises the latitudinal position of the tile in the overall tile map system taken the zoom level into account. The latitude is clipped to range from circa -85 to 85 degrees. The y coordinates increase from north to south starting at a latitude of around 85 degrees.                                                                                       |
-| **Geometry**                        | Each task has a polygon geometry, which can be generated by its x, y and z coordinates. At the equator the task geometry is a square with an edge length of around 150 metres covering circa 0.0225 square kilometres. Due to the web Mercator projector the task geometry will be clinched with increasing distance to the equator. At the same time the area per task will decrease. |
-| **Tile URL**                        | The tile URL points to the specific tile image described by the x, y, and z coordinates. Usually, the image has a resolution of 256 x 256 pixels. However, some providers also generate image tiles with higher resolution (e.g. 512 x 512 pixels).                                                                                                                                    |
+| Parameter    | Type   | Description                                                                                                                                                                                                                                                                                                                                                                            |
+|--------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **taskX**    | int    | The x coordinate characterises the longitudinal position of the tile in the overall tile map system taken the zoom level into account. The x coordinates increase from west to east starting at a longitude of -180 degrees.                                                                                                                                                           |
+| **taskY**    | int    | The y coordinate characterises the latitudinal position of the tile in the overall tile map system taken the zoom level into account. The latitude is clipped to range from circa -85 to 85 degrees. The y coordinates increase from north to south starting at a latitude of around 85 degrees.                                                                                       |
+| **geometry** | string | Each task has a polygon geometry, which can be generated by its x, y and z coordinates. At the equator the task geometry is a square with an edge length of around 150 metres covering circa 0.0225 square kilometres. Due to the web Mercator projector the task geometry will be clinched with increasing distance to the equator. At the same time the area per task will decrease. |
+| **url**      | string | The tile URL points to the specific tile image described by the x, y, and z coordinates. Usually, the image has a resolution of 256 x 256 pixels. However, some providers also generate image tiles with higher resolution (e.g. 512 x 512 pixels).                                                                                                                                    |
 
-Below is an example json for a tutorial project, as can be seen on the three extra attributes screen, referenceAnswer and taskID_real.
+## Result
+Results follow the [common result shape](/project_types/#results), with `results: dict[str, int]` keyed by `taskId`. The integer encoding for Find Features is:
 
-```json
-{
-  "groupId": 101,
-  "projectId": "tutorial_-MGwrwsP9cTYf6c_Nbg3",
-  "referenceAnswer": 0,
-  "screen": 1,
-  "taskId": "18-100-131072",
-  "taskId_real": "18-65040-120545",
-  "taskX": 100,
-  "taskY": 131072,
-  "url": "https://ecn.t0.tiles.virtualearth.net/tiles/a023313133022210002.jpeg?g=7505&mkt=en-US"
-}
-```
+| Value | Meaning      |
+|-------|--------------|
+| `1`   | Yes          |
+| `2`   | Maybe        |
+| `3`   | Bad Imagery  |
 
-## Results
-Results contain information on the user classifications. However, only “Yes” (1), “Maybe” (2) and “Bad Imagery” (3) classifications are stored as results. Whenever users indicate “No building” by just swiping to the next set of tasks, no data entry is created.
-“No Building” classifications can only be modelled retrospectively for groups where a user also submitted at least one “Yes”, “Maybe” or “Bad Imagery” classification.
+Whenever users indicate "No building" by just swiping to the next set of tasks, no data entry is created. "No Building" classifications can only be modelled retrospectively for groups where a user also submitted at least one "Yes", "Maybe" or "Bad Imagery" classification.
