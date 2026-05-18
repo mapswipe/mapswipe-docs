@@ -15,6 +15,8 @@ A read-only script that downloads every per-project data export listed in the [A
 > [!CAUTION]
 > Ongoing updates to MapSwipe may render this script **out-of-date**.
 
+Utility script: [`run.py`](run.py)
+
 ## What it does
 
 1. Hits `https://backend.mapswipe.org/health-check/` once to obtain a CSRF cookie.
