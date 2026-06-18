@@ -18,7 +18,7 @@ Utility script: [`run.py`](run.py)
 
 ## Real-world usage
 
-- https://github.com/hotosm/fAIr/blob/develop/backend/core/mapswipe_client.py
+- https://github.com/hotosm/fAIr/blob/develop/backend/shared/integrations/mapswipe.py
 
 ## Getting started
 
