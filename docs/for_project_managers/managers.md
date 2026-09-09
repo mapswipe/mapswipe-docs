@@ -17,18 +17,14 @@ All project managers are listed in the **Managers** section on the manager dashb
 
 Project managers sign into the manager dashboard with their MapSwipe app credentials. So before anyone can become a project manager, they must already have a MapSwipe app account (web or mobile) — referred to as a *contributor user* in the manager dashboard.
 
-The super admin then creates a manager-dashboard user with the same email address the contributor signed up with. Once the two accounts are linked, the user can sign in to the dashboard.
-
-### Future iteration
-
-The plan is to streamline new manager requests with a [Slackbot survey](https://slack.com/shortcuts/Ft09CHNNHZNX/8d0d6f7d69a1350a91b2ef33fc6d5704) that asks for:
-
+The super admin then creates a manager-dashboard user with the same email address the contributor signed up with after the following information are provided. Once the two accounts are linked, the user can sign in to the dashboard.
 - Full name
 - Organisation
 - Contributor user email address
 - Contributor user ID
 - Community dashboard profile link
 - Purpose
+- Slack member ID
 
 Responses land in a private Slack channel monitored by the governance team. Once the intent is confirmed, channel members reach out to the requester with an update and ask the super admin to create the manager account. The super admin then provisions the account and follows up with the requester.
 
