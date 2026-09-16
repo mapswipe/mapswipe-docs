@@ -15,6 +15,8 @@ Unlike Find Features, which asks whether an object is present anywhere in a full
 
 The mini-tile grid is a virtual subdivision of the same tile/zoom level (quad-tree style), not a request for higher-zoom imagery. The output is intended to produce AI-ready training datasets (e.g. for HOT's fAIr), so results capture per-mini-tile classification rather than a single yes/no per tile.
 
+![](/assets/project_types/project_types/images/locate-objects.png)
+
 Locate Objects projects have `projectType = 9`.
 
 ## Project
