@@ -21,6 +21,7 @@ One row per submission, with the following columns:
 | project_id          | string  | The project identifier. Usually a ULID for new projects; legacy Firebase-style for older migrated projects.    |
 | group_id            | string  | Public group identifier within the project (e.g. `g183`).                                                      |
 | task_id             | string  | Public task identifier; for tile-based projects formatted as `TileZ-TileX-TileY`.                              |
+| task_partition_index | integer | Index of the mini-tile partition within the task (Locate Objects only, since a task's result is a list of per-partition values). Empty for other project types. |
 | user_id             | string  | The Firebase user ID of the contributor.                                                                       |
 | timestamp           | string  | When the result was recorded (ISO 8601 with timezone).                                                         |
 | start_time          | string  | When the user started the task (ISO 8601 with timezone).                                                       |
