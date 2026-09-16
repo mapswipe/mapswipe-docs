@@ -13,7 +13,7 @@ The MapSwipe crowdsourcing workflow is designed following an approach already pr
 3. **Distributing** *groups* and *tasks* to many users redundantly (e.g. every area gets mapped by at least three different users)
 4. **Aggregating** all responses (*results*) per *task* from different users  to reach a final solution (e.g. by choosing the majority vote)
 
-The MapSwipe backend now supports 6 **project types**. Each project type formulates a specific kind of mapping challenge — follow the links for a description, screenshot, and data model details for each one.
+The MapSwipe backend now supports 7 **project types**. Each project type formulates a specific kind of mapping challenge — follow the links for a description, screenshot, and data model details for each one.
 
 - [Find Features](project_types/find_features.md)
 - [Validate Footprints](project_types/validate_footprints.md)
@@ -21,6 +21,7 @@ The MapSwipe backend now supports 6 **project types**. Each project type formula
 - [Assess Images](project_types/assess_images.md)
 - [Check Completeness](project_types/check_completeness.md)
 - [View Streets](project_types/view_streets.md)
+- [Locate Objects](project_types/locate_objects.md)
 
 
 ## Data Model
@@ -41,7 +42,7 @@ A project is divided into several **groups**, which are in turn divided into ind
 | **projectId**                       | string                     | ID of the project.                                                                                                                                  |
 | **name**                            | string                     | The name of the project (25 chars max).                                                                                                             |
 | **lookFor**                         | string (optional)          | What should the users look for (e.g. buildings, cars, trees)? (15 chars max).                                                                       |
-| **projectType**                     | enum (int)                 | Identifies the project type: `1` = Find Features, `2` = Validate Footprints, `3` = Compare Dates, `4` = Check Completeness, `7` = View Streets, `10` = Assess Images. See the page for each project type for the type-specific fields.                                                |
+| **projectType**                     | enum (int)                 | Identifies the project type: `1` = Find Features, `2` = Validate Footprints, `3` = Compare Dates, `4` = Check Completeness, `7` = View Streets, `9` = Locate Objects, `10` = Assess Images. See the page for each project type for the type-specific fields.                                                |
 | **image**                           | string (optional)          | URL to a representative image for the project (formerly "Direct Image Link"). Make sure you have the rights to use this image; should end with `.jpg` or `.png`. |
 | **projectDetails**                  | string                     | Description of the project (3-5 sentences).                                                                                                         |
 | **projectInstruction**              | string (optional)          | Instructions shown to the contributor during mapping.                                                                                               |
