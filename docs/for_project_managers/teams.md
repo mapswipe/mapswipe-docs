@@ -12,7 +12,14 @@ The Teams page lists all the teams along with their members, including both `act
 ![](/assets/docs/for_project_managers/images/muml1e3e4su2dvhizxg2mipok.png)
 
 ## Team Membership
-Only super admins can add or remove users from a team. If you would like to add or remove a team member, please reach out to the super admin.
+Only super admins can add or remove users from a team. If you would like to add or remove a team member, please reach out to the super admin with the following information.
+- Full name
+- Organisation name
+- Contributor username
+- Contributor email address
+- Community dashboard profile link
+- In case of OSM user, OSM id (eg: osm:12489)
+- Team name
 
 ## Project Visibility
 Teams scope which projects a contributor sees:
