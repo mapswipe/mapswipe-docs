@@ -1,3 +1,7 @@
+[default.extend-words]
+subtile = "subtile"
+subtiles = "subtiles"
+
 [default]
 extend-ignore-re = [
     # Ignore link
