@@ -57,6 +57,7 @@ uv run examples/fetch-global-data/run.py \
 | Name | id | firebaseId |
 | --- | --- | --- |
 | Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT | 2962 | 01KMMX0C9MG396SCV8W8CZ8RY3 |
+| Locate Objects - Locate Solar Panels Freetown - Sierra Leone (1) HOT | 3440 | 01M4T5A2VAA1HD7QHJWYY5S7FE |
 
 
 ## Changing the Syntax Highlighting Theme
