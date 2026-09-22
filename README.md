@@ -54,7 +54,7 @@ uv run examples/fetch-global-data/run.py \
 
 ### Projects Mapping
 
-| Name | id | firebaseId | Backend |
+| Name | id | firebaseId | Environment |
 | --- | --- | --- | --- |
 | Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT | 2962 | 01KMMX0C9MG396SCV8W8CZ8RY3 | production |
 | Locate Objects - Locktown 19 - Locktown (1) Togglecorp | 823 | 01KWVDB9RCEMFXK2GMMQYHFMN6 | staging |
