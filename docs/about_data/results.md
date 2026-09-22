@@ -36,3 +36,4 @@ One row per submission, with the following columns:
 A 10-row preview is shipped alongside these docs for reference. **It is not the live dataset** — for the full export, see the [MapSwipe data page](https://mapswipe.org/en/data/). The live file is delivered as gzipped CSV (`.csv.gz`) — unzip before use; the sample below is already decompressed.
 
 - `results_{project_id}.csv`, e.g. [results_2962.csv](/assets/docs/about_data/files/project_exports/results_2962.csv)
+- For a Locate Objects project (`task_partition_index` populated), e.g. Locate Objects - Locktown 19 - Locktown (1) Togglecorp — `id` `823`: [results_823.csv](/assets/docs/about_data/files/project_exports/locate_objects/results_823.csv)

@@ -44,3 +44,4 @@ Additionally, project type specific data can be found here. E.g. Validate projec
 A 10-row preview is shipped alongside these docs for reference. **It is not the live dataset** — for the full export, see the [MapSwipe data page](https://mapswipe.org/en/data/). The live file is delivered as gzipped CSV (`.csv.gz`) — unzip before use; the sample below is already decompressed.
 
 - `agg_results_by_task_{project_id}.csv`, e.g. [agg_results_by_task_2962.csv](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962.csv)
+- For a Locate Objects project (`task_partition_index` populated), e.g. Locate Objects - Locktown 19 - Locktown (1) Togglecorp — `id` `823`: [agg_results_by_task_823.csv](/assets/docs/about_data/files/project_exports/locate_objects/agg_results_by_task_823.csv)
