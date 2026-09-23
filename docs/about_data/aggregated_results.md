@@ -16,7 +16,7 @@ One row per task, with the following columns:
 | ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | idx                 | integer | Sequential row index.                                                                                                                                                                           |
 | task_id             | string  | The ID of the task. For tile-based project types (e.g. Find Features) this is a composition of `TileZ-TileX-TileY`.                                                                             |
-| task_partition_index | integer | Index of the mini-tile partition within the task (Locate Objects only). Rows are aggregated per partition rather than per task for this project type; empty for other project types.          |
+| task_partition_index | integer | Index of the subtile within the task (Locate Objects only). Rows are aggregated per subtile rather than per task for this project type; empty for other project types.          |
 | 0_count             | integer | The number of users who marked this task as 0, e.g. "no building" for Find Features.                                                                   |
 | 1_count             | integer | The number of users who marked this task as 1, e.g. "building" for Find Features.                                                                                                               |
 | 2_count             | integer | The number of users who marked this task as 2, e.g. "maybe" for Find Features.                                                                                                                  |
@@ -44,3 +44,4 @@ Additionally, project type specific data can be found here. E.g. Validate projec
 A 10-row preview is shipped alongside these docs for reference. **It is not the live dataset** — for the full export, see the [MapSwipe data page](https://mapswipe.org/en/data/). The live file is delivered as gzipped CSV (`.csv.gz`) — unzip before use; the sample below is already decompressed.
 
 - `agg_results_by_task_{project_id}.csv`, e.g. [agg_results_by_task_2962.csv](/assets/docs/about_data/files/project_exports/agg_results_by_task_2962.csv)
+- For a Locate Objects project (`task_partition_index` populated), e.g. Locate Objects - Locktown 19 - Locktown (1) Togglecorp — `id` `823`: [agg_results_by_task_823.csv](/assets/docs/about_data/files/project_exports/locate_objects/agg_results_by_task_823.csv)

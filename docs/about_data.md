@@ -25,6 +25,13 @@ Exports scoped to a single project. For the examples on the following pages we u
 
 > *Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT — `id` `2962`, `firebaseId` `01KMMX0C9MG396SCV8W8CZ8RY3`*
 
+[Aggregated Results](about_data/aggregated_results.md) and [Results](about_data/results.md) document a
+`task_partition_index` column that's only ever populated for Locate Objects projects — it's empty for every other
+project type, including the Find Features sample above. For those two pages only, a second sample from a Locate
+Objects project is shipped in its own `locate_objects/` subfolder:
+
+> *Locate Objects - Locktown 19 - Locktown (1) Togglecorp — `id` `823`, `firebaseId` `01KWVDB9RCEMFXK2GMMQYHFMN6`*
+
 - [Aggregated Results](about_data/aggregated_results.md) — unfiltered MapSwipe results aggregated on the task level (CSV).
 - [Aggregated Results (with Geometry)](about_data/aggregated_results_with_geometry.md) — same data as Aggregated Results, delivered as a GeoJSON `FeatureCollection`.
 - [Groups](about_data/groups.md) — task groups and their progress.
