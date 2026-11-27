@@ -48,12 +48,11 @@ Tasks are saved for tutorials, since their spatial information can be derived fr
 | **url**      | string | The tile URL points to the specific tile image described by the x, y, and z coordinates. Usually, the image has a resolution of 256 x 256 pixels. However, some providers also generate image tiles with higher resolution (e.g. 512 x 512 pixels).                                                                                                                                    |
 
 ## Result
-Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer encoding is:
 
 | Value | Meaning     |
 |-------|-------------|
+| `0`   | No          |
 | `1`   | Yes         |
 | `2`   | Maybe       |
 | `3`   | Bad Imagery |
-
-Whenever users indicates "No" by just swiping to the next set of tasks, no data entry is created. "No" classifications can only be modelled retrospectively for groups where a user also submitted at least one "Yes", "Maybe" or "Bad Imagery" classification.
