@@ -16,10 +16,6 @@ This script is provided as an example for interacting with the MapSwipe backend.
 
 Utility script: [`run.py`](run.py)
 
-## Real-world usage
-
-- https://github.com/hotosm/fAIr/blob/develop/backend/shared/integrations/mapswipe.py
-
 ## Getting started
 
 > [!NOTE]
