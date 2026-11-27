@@ -51,8 +51,7 @@ Results follow the [common result shape](../project_types.md#results), with `res
 
 | Value | Meaning      |
 |-------|--------------|
+| `0`   | No           |
 | `1`   | Yes          |
 | `2`   | Maybe        |
 | `3`   | Bad Imagery  |
-
-Whenever users indicate "No building" by just swiping to the next set of tasks, no data entry is created. "No Building" classifications can only be modelled retrospectively for groups where a user also submitted at least one "Yes", "Maybe" or "Bad Imagery" classification.

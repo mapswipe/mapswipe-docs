@@ -45,12 +45,11 @@ Compare Dates groups carry tile-map-service bounding-box tile coordinates on top
 | **urlB**     | string (optional) | Image for the tile after timestamp A. The tile URL points to the specific tile image described by the x, y, and z coordinates.                                                                                                                                                                                                                                                         |
 
 ## Result
-Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. Only the following classifications are stored:
+Results follow the [common result shape](../project_types.md#results), with `results: dict[str, int]` keyed by `taskId`. The integer encoding is:
 
 | Value | Meaning     |
 |-------|-------------|
+| `0`   | No Change   |
 | `1`   | Yes         |
 | `2`   | Maybe       |
 | `3`   | Bad Imagery |
-
-Whenever users indicate "No Change" by just swiping to the next task, no data entry is created.

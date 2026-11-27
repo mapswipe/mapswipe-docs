@@ -23,7 +23,14 @@ Exports that describe the whole MapSwipe project catalog.
 ## Project Specific Exports
 Exports scoped to a single project. For the examples on the following pages we use:
 
-> *Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT — `id` `2962`, `firebaseId` `01KMMX0C9MG396SCV8W8CZ8RY3`*
+> *Find Features - Find Buildings - Mozambique Floods 2026 - Chibuto (1) HOT (`id` `2962`, `firebaseId` `01KMMX0C9MG396SCV8W8CZ8RY3`)*
+
+[Aggregated Results](about_data/aggregated_results.md) and [Results](about_data/results.md) document a
+`task_partition_index` column that is populated only for Locate Objects projects and is empty for every other
+project type, including the Find Features sample above. For those two pages only, a second sample from a Locate
+Objects project is shipped in its own `locate_objects/` subfolder:
+
+> *Locate Objects - Locate Solar Panels Freetown - Sierra Leone (1) HOT (`id` `3440`, `firebaseId` `01M4T5A2VAA1HD7QHJWYY5S7FE`)*
 
 - [Aggregated Results](about_data/aggregated_results.md) — unfiltered MapSwipe results aggregated on the task level (CSV).
 - [Aggregated Results (with Geometry)](about_data/aggregated_results_with_geometry.md) — same data as Aggregated Results, delivered as a GeoJSON `FeatureCollection`.

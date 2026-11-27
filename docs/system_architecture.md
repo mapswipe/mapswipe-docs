@@ -47,16 +47,10 @@ The major difference in the new architecture is that **Postgres is the primary d
 - **Source:** [`mapswipe/website`](https://github.com/mapswipe/website)
 - **Deployed at:** <https://mapswipe.org/>
 
-The public-facing website for MapSwipe — an introduction to the project, recent mapping work, the organisations behind it, and links to the apps and dashboards.
+The public information site for MapSwipe. It introduces the project and its partners, lists the project types, links to the mobile and web apps, and publishes blog posts. It also hosts:
 
-### Mobile App
-
-- **Source:** [`mapswipe/mapswipe`](https://github.com/mapswipe/mapswipe)
-- **Deployed at:**
-    - Android — [Google Play Store](https://play.google.com/store/apps/details?id=org.missingmaps.mapswipe)
-    - iOS — [App Store](https://apps.apple.com/us/app/mapswipe/id1133855392)
-
-The contributor-facing app where users swipe to complete tasks. Reads project, group, and task data from Firebase Realtime Database; writes submitted results back to Firebase, which are then synced to the backend.
+- The [Data](https://mapswipe.org/en/data/) page, with the project list and the global exports documented under [About the Data](/docs/about_data/).
+- The [Get Involved](https://mapswipe.org/en/get-involved/) page, with ways to contribute (translation, development, donations) and the [MapSwipe Event Toolkit](https://drive.google.com/drive/folders/1j5XnyqI_LKYBCg9oJaaWIKbsBxwB8Cld) for groups hosting mapping events. The toolkit includes the event logos.
 
 ### Manager Dashboard
 
@@ -64,13 +58,6 @@ The contributor-facing app where users swipe to complete tasks. Reads project, g
 - **Deployed at:** <https://managers.mapswipe.org/>
 
 The web application project managers use to create and manage projects, tutorials, organisations, managers, contributors, user groups, and teams. Talks to the MapSwipe backend via GraphQL. See [For Project Managers](/docs/for_project_managers/) for the user-facing documentation.
-
-### Community Dashboard
-
-- **Source:** [`mapswipe/community-dashboard`](https://github.com/mapswipe/community-dashboard)
-- **Deployed at:** <https://community.mapswipe.org/>
-
-A React-based static site showcasing aggregated MapSwipe contribution stats, plus profile pages for users, user groups, and organisations. Reads cached aggregated data from the backend.
 
 ### Backend
 
@@ -89,3 +76,26 @@ The central **Django server** backed by Postgres. A single service is responsibl
 Cloud Functions that react to Firebase Realtime Database events — incrementing per-user contribution counters when results arrive, propagating user-group membership changes, queuing PSQL-sync flags so the backend knows what changed, and serving the OSM OAuth login.
 
 The functions co-exist with the runtime **Firebase Realtime Database**, which holds active project / group / task data and in-flight result submissions until the backend workers transfer them to Postgres database.
+
+### Mobile App
+
+- **Source:** [`mapswipe/mapswipe-mobile`](https://github.com/mapswipe/mapswipe-mobile)
+- **Deployed at:**
+    - Android — [Google Play Store](https://play.google.com/store/apps/details?id=org.missingmaps.mapswipe)
+    - iOS — [App Store](https://apps.apple.com/us/app/mapswipe/id1133855392)
+
+The contributor-facing app where users swipe to complete tasks. Reads project, group, and task data from Firebase Realtime Database; writes submitted results back to Firebase, which are then synced to the backend.
+
+### Web App
+
+- **Source:** [`mapswipe/mapswipe-web`](https://github.com/mapswipe/mapswipe-web)
+- **Deployed at:** <https://web.mapswipe.org/>
+
+The browser version of the contributor app. Like the Mobile App, it reads project, group, and task data from Firebase Realtime Database and writes submitted results back to Firebase, which are then synced to the backend.
+
+### Community Dashboard
+
+- **Source:** [`mapswipe/community-dashboard`](https://github.com/mapswipe/community-dashboard)
+- **Deployed at:** <https://community.mapswipe.org/>
+
+A React-based static site showcasing aggregated MapSwipe contribution stats, plus profile pages for users, user groups, and organisations. Reads cached aggregated data from the backend.
